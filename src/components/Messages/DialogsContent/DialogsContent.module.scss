@@ -1,0 +1,27 @@
+.DialogsContent {
+	display: grid;
+	grid-template-rows: 1fr 60px;
+	padding: 0px 10px;
+}
+
+.sendingItems {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	.messageInput {
+		display: inline-block;
+		width: 94%;
+		height: 40px;
+		box-sizing: border-box;
+		border-radius: 14px;
+		padding: 8px;	
+		font-size: 18px;
+		resize: none;
+	}
+
+	.sendButton {
+		cursor: pointer;
+		height: 32px;
+	}
+}

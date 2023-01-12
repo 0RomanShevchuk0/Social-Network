@@ -1,0 +1,19 @@
+@import './../../variables';
+
+.header {
+	width: 100%;
+	padding: 0px 20px;
+	display: flex;
+	align-items: center;
+	background: rgb(22, 22, 22);
+	border-bottom: 1px solid $border-color;
+	border-top-left-radius: 12px;
+	border-top-right-radius: 12px;
+	box-sizing: border-box;
+
+	grid-area: header;
+}
+
+.logoImage {
+	width: 60px;
+}

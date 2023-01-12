@@ -1,0 +1,80 @@
+const ADD_MESSAGE = "ADD-MESSAGE";
+const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
+
+let initialState = {
+  dialogs: [
+    {
+      id: "19",
+      name: "Apelsinka",
+    },
+    {
+      id: "76",
+      name: "Nikita",
+    },
+    {
+      id: "43",
+      name: "Vlad",
+    },
+  ],
+  messages: [
+    {
+      id: "1",
+      message: "Hello",
+    },
+    {
+      id: "2",
+      message: "I am Homa",
+    },
+    {
+      id: "3",
+      message: "Homa-Roma",
+    },
+  ],
+  newMessageText: "",
+};
+
+let addMessageId = 4;
+
+const messageReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case ADD_MESSAGE: {			
+			if (state.newMessageText !== "") {
+				let newMessage = {
+					id: addMessageId,
+          message: state.newMessageText,
+        };
+				addMessageId++;
+				return {
+					...state,
+					messages : [...state.messages, newMessage],
+					newMessageText : ""
+				}
+      }
+		}
+
+    case UPDATE_NEW_MESSAGE_TEXT: {
+      return {
+				...state,
+				newMessageText : action.newMessageText
+			};
+		}
+
+    default:
+      return state;
+  }
+};
+
+
+export const updateNewMessageTextActionCreator = (newText) => {
+  return {
+    type: UPDATE_NEW_MESSAGE_TEXT,
+    newMessageText: newText,
+  };
+};
+export const addMessageActionCreator = () => {
+  return {
+    type: ADD_MESSAGE,
+  };
+};
+
+export default messageReducer;

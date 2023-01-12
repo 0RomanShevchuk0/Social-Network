@@ -1,0 +1,36 @@
+.post {
+	display: flex;
+	justify-content: space-between;
+	box-sizing: border-box;
+	padding: 10px 10px;
+}
+
+.mainBody {
+	display: flex;
+	align-items: center;
+	box-sizing: border-box;
+}
+
+.avatar {
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+	border-radius: 50px;
+	border: 1px solid rgb(230, 221, 221);
+}
+
+.content {
+	padding: 0px 20px;
+}
+
+.reactions {
+	margin: auto 0;
+
+	.like {
+		cursor: pointer;
+		width: 20px;
+	}
+	.likesCount {
+		font-size: 20px;
+	}
+}

@@ -1,0 +1,52 @@
+@import './../../variables';
+
+.navbar {
+	background-color: $bg-color;
+	border-right: 1px solid $border-color;
+	border-bottom-left-radius: 12px;
+	color: rgb(233, 220, 220);
+
+	grid-area: navbar;
+
+	.items {
+		list-style: none;
+		padding: 0px 20px;
+
+		.item {
+			transition: 1s;
+			display: inline-block;
+			position: relative;
+			text-decoration: none;
+			margin: 8px 0px;
+			font-size: 18px;
+			color: rgb(233, 220, 220);
+
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				height: 2px;
+				width: 0%;
+				background-color: rgb(255, 255, 255);
+				border-radius: 12px;
+				transition: .3s;
+			}
+			&::before {
+				left: 49%;
+			}
+			&::after {
+				right: 49%;
+			}
+		}
+	}
+}
+
+.active {
+	&::before {
+		width: 51%!important;
+	}
+	&::after {
+		width: 51%!important;
+	}
+}

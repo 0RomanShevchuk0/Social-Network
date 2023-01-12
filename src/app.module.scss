@@ -1,0 +1,55 @@
+@import 'variables';
+
+.App {
+	display: flex;
+	justify-content: center;
+	background: rgb(218, 178, 224);
+}
+
+.wrapper {
+	width: 100%;
+	box-sizing: border-box;
+	max-width: 1200px;
+	min-height: 100vh;
+
+	display: grid;
+	grid-template-rows: 80px 1fr;
+	grid-template-columns: 1fr 5fr;
+	grid-template-areas: 
+	"header header "
+	"navbar content ";
+}
+
+.appContent {
+	grid-area: content;
+	background: $bg-color;
+	border-bottom-right-radius: 12px;
+	color: rgb(233, 220, 220);
+	box-sizing: border-box;
+}
+
+//* Scrollbar
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+	background: rgb(0, 0, 0);
+	border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffffff;
+	border-radius: 6px;
+}
+
+//* Audio Player
+audio {
+	width: 100%;
+	height: 40px;
+	box-sizing: border-box;
+}
+
+audio::-webkit-media-controls-panel {
+	background-color: rgb(207, 207, 207);
+}

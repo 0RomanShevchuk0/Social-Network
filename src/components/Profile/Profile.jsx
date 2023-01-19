@@ -1,13 +1,20 @@
 import styles from "./Profile.module.scss";
-import DescriptionContainer from "./Description/DescriptionContainer";
-import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import MyPosts from "./MyPosts/MyPosts";
+import Description from "./Description/Description";
 
 
 const Profile = (props) => {
   return (
     <div className={styles.profile}>
-      <DescriptionContainer store={props.store} />
-      <MyPostsContainer store={props.store} />
+      <Description profile={props.profile} />
+      <MyPosts
+				profile={props.profile} 
+				posts={props.posts} 
+				newPostText={props.newPostText}
+				
+				addPost={props.addPost}
+				updateNewPostText={props.updateNewPostText}
+			/>
     </div>
   );
 };

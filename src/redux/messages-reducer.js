@@ -19,15 +19,15 @@ let initialState = {
   messages: [
     {
       id: "1",
-      message: "Hello",
+      message: "Hi",
     },
     {
       id: "2",
-      message: "I am Homa",
+      message: "What`s up?",
     },
     {
       id: "3",
-      message: "Homa-Roma",
+      message: "We could go somewhere tonight if u don't mind",
     },
   ],
   newMessageText: "",

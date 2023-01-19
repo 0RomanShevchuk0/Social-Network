@@ -1,6 +1,6 @@
 import styles from "./Post.module.scss";
 
-import avatar from "./../../../../assets/img/panda.jpg";
+import defaultAvatar from "./../../../../assets/img/DialogPersone.png";
 import like from "./../../../../assets/img/like.png";
 
 const Post = (props) => {
@@ -9,7 +9,7 @@ const Post = (props) => {
       <div className={styles.mainBody}>
 
         <div className={styles.avatarWrapper}>
-          <img className={styles.avatar} src={avatar} alt="Avatar" />
+          <img className={styles.avatar} src={props.profile.photos.small ? props.profile.photos.small : defaultAvatar} alt="Avatar" />
         </div>
 
         <div className={styles.content}>

@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import styles from "./app.module.scss";
 
@@ -13,7 +13,7 @@ import Settings from "./components/Settings/Settings";
 
 const App = (props) => {		
 	return (
-		<HashRouter basename="/qqq">
+		<BrowserRouter basename="Social-Network">
 			<div className={styles.App}>
 				<div className={styles.wrapper}>
 					<Header />
@@ -30,7 +30,7 @@ const App = (props) => {
 					</div>
 				</div>
 			</div>
-		</HashRouter>
+		</BrowserRouter>
 	);
 };
 

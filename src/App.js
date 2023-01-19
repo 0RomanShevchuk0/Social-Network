@@ -20,12 +20,12 @@ const App = (props) => {
 					<Navbar />
 					<div className={styles.appContent}>
 						<Routes>
-							<Route path="/Profile" element={<Profile store={props.store} />} />
-							<Route path="/Messages/*" element={<Messages store={props.store} />} />
-							<Route path="/Users" element={<UsersContainer store={props.store} />} />
-							<Route path="/News" element={<News />} />
-							<Route path="/Music" element={<MusicContainer store={props.store} />} />
-							<Route path="/Settings" element={<Settings />} />
+							<Route path="/profile/*" element={<Profile store={props.store} />} />
+							<Route path="/messages/*" element={<Messages store={props.store} />} />
+							<Route path="/users" element={<UsersContainer store={props.store} />} />
+							<Route path="/news" element={<News />} />
+							<Route path="/music" element={<MusicContainer store={props.store} />} />
+							<Route path="/settings" element={<Settings />} />
 						</Routes>
 					</div>
 				</div>

@@ -9,7 +9,7 @@ const Navbar = () => {
         <li>
 					<NavLink
 						className={navData => navData.isActive ? [styles.item,styles.active].join(' ') : styles.item} 
-						to="/Profile">
+						to="/profile">
 							Profile
 					</NavLink>
 				</li>
@@ -17,7 +17,7 @@ const Navbar = () => {
         <li>
 					<NavLink 
 						className={navData => navData.isActive ? [styles.item,styles.active].join(' ') : styles.item} 
-						to="/Messages">
+						to="/messages">
 							Messages
 					</NavLink>
 				</li>
@@ -25,7 +25,7 @@ const Navbar = () => {
         <li>
 					<NavLink 
 						className={navData => navData.isActive ? [styles.item,styles.active].join(' ') : styles.item} 
-						to="/Users">
+						to="/users">
 							Users
 					</NavLink>
 				</li>
@@ -33,7 +33,7 @@ const Navbar = () => {
         <li>
 					<NavLink 
 						className={navData => navData.isActive ? [styles.item,styles.active].join(' ') : styles.item} 
-						to="/News">
+						to="/news">
 							News
 					</NavLink>
 				</li>
@@ -41,7 +41,7 @@ const Navbar = () => {
         <li>
 					<NavLink 
 						className = {navData => navData.isActive ? [styles.item,styles.active].join(' ') : styles.item} 
-						to="/Music">
+						to="/music">
 							Music
 					</NavLink>
 				</li>
@@ -49,7 +49,7 @@ const Navbar = () => {
         <li>
 					<NavLink 
 						className={navData => navData.isActive ? [styles.item,styles.active].join(' ') : styles.item} 
-						to="/Settings">
+						to="/settings">
 							Settings
 					</NavLink>
 				</li>

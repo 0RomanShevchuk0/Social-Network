@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/Social-Network/profile/static/css/main.ce4c6b6b.css",
-    "main.js": "/Social-Network/profile/static/js/main.d7080ac5.js",
-    "static/js/787.223550ad.chunk.js": "/Social-Network/profile/static/js/787.223550ad.chunk.js",
-    "static/media/skillet-hero.mp3": "/Social-Network/profile/static/media/skillet-hero.98ed7994ce4cd9a93d01.mp3",
-    "static/media/sea-shanty.mp3": "/Social-Network/profile/static/media/sea-shanty.78099d55c24249eecfe3.mp3",
-    "static/media/lil-peep-spotlight.mp3": "/Social-Network/profile/static/media/lil-peep-spotlight.795f5df83aefd19d0de6.mp3",
-    "static/media/panda.jpg": "/Social-Network/profile/static/media/panda.f6a730c086415615b282.jpg",
-    "static/media/logo.png": "/Social-Network/profile/static/media/logo.2873634d161c296bd106.png",
-    "static/media/DialogPersone.png": "/Social-Network/profile/static/media/DialogPersone.a052765be0dbded11a05.png",
-    "static/media/loader.svg": "/Social-Network/profile/static/media/loader.5b39333a58ca8ed669495cd1ad9cd4c0.svg",
-    "index.html": "/Social-Network/profile/index.html",
-    "main.ce4c6b6b.css.map": "/Social-Network/profile/static/css/main.ce4c6b6b.css.map",
-    "main.d7080ac5.js.map": "/Social-Network/profile/static/js/main.d7080ac5.js.map",
-    "787.223550ad.chunk.js.map": "/Social-Network/profile/static/js/787.223550ad.chunk.js.map"
+    "main.css": "/Social-Network/static/css/main.ce4c6b6b.css",
+    "main.js": "/Social-Network/static/js/main.321d1145.js",
+    "static/js/787.223550ad.chunk.js": "/Social-Network/static/js/787.223550ad.chunk.js",
+    "static/media/skillet-hero.mp3": "/Social-Network/static/media/skillet-hero.98ed7994ce4cd9a93d01.mp3",
+    "static/media/sea-shanty.mp3": "/Social-Network/static/media/sea-shanty.78099d55c24249eecfe3.mp3",
+    "static/media/lil-peep-spotlight.mp3": "/Social-Network/static/media/lil-peep-spotlight.795f5df83aefd19d0de6.mp3",
+    "static/media/panda.jpg": "/Social-Network/static/media/panda.f6a730c086415615b282.jpg",
+    "static/media/logo.png": "/Social-Network/static/media/logo.2873634d161c296bd106.png",
+    "static/media/DialogPersone.png": "/Social-Network/static/media/DialogPersone.a052765be0dbded11a05.png",
+    "static/media/loader.svg": "/Social-Network/static/media/loader.5b39333a58ca8ed669495cd1ad9cd4c0.svg",
+    "index.html": "/Social-Network/index.html",
+    "main.ce4c6b6b.css.map": "/Social-Network/static/css/main.ce4c6b6b.css.map",
+    "main.321d1145.js.map": "/Social-Network/static/js/main.321d1145.js.map",
+    "787.223550ad.chunk.js.map": "/Social-Network/static/js/787.223550ad.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ce4c6b6b.css",
-    "static/js/main.d7080ac5.js"
+    "static/js/main.321d1145.js"
   ]
 }

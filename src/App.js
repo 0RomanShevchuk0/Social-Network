@@ -13,7 +13,7 @@ import Settings from "./components/Settings/Settings";
 
 const App = (props) => {		
 	return (
-		<HashRouter baseline="/">
+		<HashRouter basename="/qqq">
 			<div className={styles.App}>
 				<div className={styles.wrapper}>
 					<Header />

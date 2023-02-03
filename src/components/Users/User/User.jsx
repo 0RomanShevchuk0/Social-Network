@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 
 const User = (props) => {
   const onFollow = () => props.follow(props.id);
-
   const onUnfollow = () => props.unfollow(props.id);
 
   return (
@@ -26,11 +25,11 @@ const User = (props) => {
         </div>
         <div className={styles.buttonWrapper}>
           {props.followed ? (
-            <button onClick={onUnfollow} className={styles.unfollowButton}>
+            <button onClick={onUnfollow} className={styles.unfollowButton} disabled={props.followingProgress.some(id => id === props.id)}>
               Unfollow
             </button>) 
             : (
-            <button onClick={onFollow} className={styles.followButton}>
+            <button onClick={onFollow} className={styles.followButton} disabled={props.followingProgress.some(id => id === props.id)}>
               Follow
             </button>
           )}

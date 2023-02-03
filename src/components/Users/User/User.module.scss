@@ -58,15 +58,26 @@
 		cursor: pointer;
 		font-weight: 600;
 	}
+
 	.followButton {
 		color: black;
 		background-color: rgb(231, 207, 207);
 		border: .1px solid rgb(20, 17, 17);
+
+		&:disabled {
+			cursor: not-allowed;
+			background-color: rgb(150, 122, 122) !important;
+		}
 	}
 	.unfollowButton {
 		color: rgb(231, 207, 207);
 		background-color: rgb(20, 17, 17);
 		border: .1px solid rgb(231, 207, 207);
+
+		&:disabled {
+			cursor: not-allowed;
+			background-color: rgb(58, 54, 54) !important;
+		}
 	}
 }
 

@@ -1,33 +1,21 @@
 import { connect } from "react-redux";
-import axios from "axios";
+import { useEffect } from "react";
 
-import { follow, setCurrentPage, setTotalUsersCount, setUsers, unfollow, setIsLoading,} from "../../redux/users-reducer";
+import { getUsers, follow, unfollow } from "../../redux/users-reducer";
 import Users from "./Users";
 
 
 const UsersContainer = (props) => {
-  if (props.users.length === 0) {
-    props.setIsLoading(true);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`)
-      .then((response) => {
-        props.setIsLoading(false);
-        props.setUsers(response.data.items);
-        props.setTotalUsersCount(response.data.totalCount);
-      });
-  }
+  useEffect(() => {
+		props.getUsers(props.currentPage, props.pageSize);
+  }, []);
 
-  let onPageChange = (pageNumber) => {
-    props.setIsLoading(true);
-    props.setCurrentPage(pageNumber);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`)
-      .then((response) => {
-        props.setIsLoading(false);
-        props.setUsers(response.data.items);
-      });
-  };
+  const onPageChange = pageNumber => props.getUsers(pageNumber, props.pageSize);
+	const follow = userId => props.follow(userId);
+	const unfollow = userId => props.unfollow(userId);
 
   return (
-    <Users {...props} onPageChange={onPageChange} follow={props.follow} unfollow={props.unfollow} />
+    <Users {...props} onPageChange={onPageChange} follow={follow} unfollow={unfollow} />
   );
 };
 
@@ -38,9 +26,8 @@ const mapStateToProps = (state) => {
     pageSize: state.usersPage.pageSize,
     currentPage: state.usersPage.currentPage,
     isLoading: state.usersPage.isLoading,
+    followingProgress: state.usersPage.followingProgress,
   };
 };
 
-export default connect(mapStateToProps, 
-	{ follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setIsLoading })
-	(UsersContainer);
+export default connect(mapStateToProps, { getUsers, follow, unfollow })(UsersContainer);

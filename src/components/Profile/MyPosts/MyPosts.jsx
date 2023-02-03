@@ -2,15 +2,16 @@ import styles from "./MyPosts.module.scss";
 
 import Post from "./Post/Post";
 import AddPost from "./NewPost/AddPost";
-import Loader from "../../../common/Loader/Loader";
 
 
 const MyPosts = (props) => {
-	let postsElements = props.posts.map(post =>  <Post profile={props.profile} content={post.content} likesCount={post.likesCount} key={post.id} />);
-
-	if (!props.profile) {
-    return <Loader />;
-  }
+	let postsElements = props.posts.map(post => 
+	<Post 
+		profile={props.profile} 
+		content={post.content} 
+		likesCount={post.likesCount} 
+		key={post.id} 
+	/>);
 
   return (
     <div className={styles.myPosts}>

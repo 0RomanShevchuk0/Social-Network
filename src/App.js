@@ -1,8 +1,8 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import styles from "./app.module.scss";
 
-import Header from "./components/Header/Header";
+import HeaderContainer from "./components/Header/HeaderContainer";
 import Navbar from "./components/Navbar/Navbar";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import Messages from "./components/Messages/Messages";
@@ -13,14 +13,13 @@ import Settings from "./components/Settings/Settings";
 
 const App = (props) => {		
 	return (
-		<BrowserRouter basename="Social-Network">
 			<div className={styles.App}>
 				<div className={styles.wrapper}>
-					<Header />
+					<HeaderContainer store={props.store} />
 					<Navbar />
 					<div className={styles.appContent}>
 						<Routes>
-							<Route path="/profile/*" element={<ProfileContainer store={props.store} />} />
+							<Route path="/profile/:userId?" element={<ProfileContainer store={props.store} />} />
 							<Route path="/messages/*" element={<Messages store={props.store} />} />
 							<Route path="/users" element={<UsersContainer store={props.store} />} />
 							<Route path="/news" element={<News />} />
@@ -30,7 +29,6 @@ const App = (props) => {
 					</div>
 				</div>
 			</div>
-		</BrowserRouter>
 	);
 };
 

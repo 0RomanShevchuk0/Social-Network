@@ -36,6 +36,8 @@ const Users = (props) => {
         country={"user.location.country"}
         city={"user.location.city"}
 				followed={user.followed}
+
+				followingProgress={props.followingProgress}
 				
 				follow={props.follow}
 				unfollow={props.unfollow}

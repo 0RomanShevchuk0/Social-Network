@@ -3,13 +3,8 @@ import styles from "./Description.module.scss";
 import defaultBackgroundrImg from "./../../../assets/img/panda.jpg";
 import defaultAvatarImg from "../../../assets/img/DialogPersone.png";
 
-import Loader from "../../../common/Loader/Loader";
-
 
 const Description = (props) => {
-  if (!props.profile) {
-    return <Loader />;
-  }
   return (
     <div className={styles.description}>
       <div className={styles.main}>

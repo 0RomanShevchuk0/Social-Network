@@ -17,11 +17,12 @@
 	margin: 8px 0px;
 	padding: 8px;
 
-	height: 28px;
-	width: 300px;
+	height: 48px;
+	width: 320px;
 	font-size: 18px;
 	border-radius: 6px;
 	border: none;
+	box-sizing: border-box;
 }
 .showPassword {
 	cursor: pointer;
@@ -62,7 +63,6 @@
 		}
 	}
 }
-
 .error {
 	color: red;
 }

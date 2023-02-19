@@ -1,7 +1,11 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { Routes, Route } from "react-router-dom";
+
+import { getAuthUserData } from "./redux/auth-reducer";
+import { initialize } from "./redux/app-reducer";
 
 import styles from "./app.module.scss";
-
 
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Navbar from "./components/Navbar/Navbar";
@@ -12,9 +16,17 @@ import News from "./components/News/News";
 import MusicContainer from "./components/Music/MusicContainer";
 import Settings from "./components/Settings/Settings";
 import Login from "./components/Login/Login";
+import Loader from "./common/Loader/Loader";
 
 
 const App = (props) => {
+
+	useEffect(() => {
+		props.initialize();
+	}, [props.isAuth]);
+	
+	if(!props.initialized) return <Loader />
+
 	return (
 			<div className={styles.App}>
 				<div className={styles.wrapper}>
@@ -36,4 +48,11 @@ const App = (props) => {
 	);
 };
 
-export default App;
+const mapStateToProps = (state) => {
+	return {
+		isAuth: state.auth.isAuth,
+		initialized: state.app.initialized
+	}
+}
+
+export default connect(mapStateToProps, { getAuthUserData, initialize })(App);

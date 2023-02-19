@@ -1,4 +1,4 @@
-import { authAPI, profileAPI } from "../API/api";
+import { authAPI } from "../API/api";
 
 const SET_AUTH_USER_INFO = 'SET-AUTH-USER-INFO';
 
@@ -7,7 +7,6 @@ let initialState = {
 	login: null,
 	id: null,
 	email: null,
-	photoURL: null,
 	isAuth: false,
 };
 
@@ -26,29 +25,27 @@ const authReducer = (state = initialState, action) => {
 };
 
 
-const setAuthUserData = (login, id, email, isAuth, photoURL) => ({ type: SET_AUTH_USER_INFO, data: {login, id, email, isAuth, photoURL} });
+const setAuthUserData = (login, id, email, isAuth) => ({ type: SET_AUTH_USER_INFO, data: {login, id, email, isAuth} });
 
-export const me = () => {
+export const getAuthUserData = () => {
 	return (dispatch) => {
-		authAPI.auth().then((authResponse) => {
+		return authAPI.me().then((authResponse) => {
 			if(authResponse.data.resultCode === 0) {
 				const { login, id, email } = authResponse.data.data;
-
-				profileAPI.getProfile(id)
-				.then((userData) => {
-					const userPhoto = userData.photos.small ? userData.photos.small : null;
-					dispatch(setAuthUserData(login, id, email, true, userPhoto));
-				});
+					dispatch(setAuthUserData(login, id, email, true));
 			}
 		});
 	}
 }
 
-export const login = (email, password, rememberMe) => {
+export const login = (email, password, rememberMe, setStatus) => {
 	return (dispatch) => {
-		authAPI.login(email, password, rememberMe).then(response => {
+		return authAPI.login(email, password, rememberMe).then(response => {
 			if(response.resultCode === 0) {
 				dispatch(setAuthUserData());
+			}
+			else {
+				setStatus({error: response.messages[0]})
 			}
 		});
 	}

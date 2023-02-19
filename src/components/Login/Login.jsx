@@ -9,14 +9,19 @@ import { validateLogin, validatePassword } from '../../common/validator';
 import styles from "./Login.module.scss";
 import showPassword from "../../assets/img/show.png";
 import hidePassword from "../../assets/img/hide.png";
+import Input from '../../common/Input/Input';
+
 
 const Login = (props) => {
 	
 	const [passwordVisibility, setPasswordVisibility] = useState("password");
 	const [passwordIcon, setPasswordIcon] = useState(showPassword);
 
-	function submit(values, { resetForm, setSubmitting }) {
-		props.login(values.email, values.password, values.rememberMe);
+	function submit(values, submitProps) {
+		props.login(values.email, values.password, values.rememberMe, submitProps.setStatus).then(() => {
+			submitProps.setSubmitting(false);
+		});
+		
 	}
 	
 	function passwordVisible() {
@@ -39,22 +44,23 @@ const Login = (props) => {
 				initialValues={{ email: "", password: "", rememberMe: false }}
 				onSubmit={submit}
 			>
-				{({ errors, touched, isSubmitting }) => (
+				{({ errors, touched, isSubmitting, status }) => (
 					<Form className={styles.loginForm}>
 						<div className={styles.inputContainer}>
 							<Field
 								name="email"
+								as={Input}
 								validate={validateLogin}
 								type="email"
 								placeholder="Login"
 								className={styles.emailInput}
 							/>
-							{errors.email && touched.email && <div className={styles.error}>{errors.email}</div>}
 						</div>
 
 						<div className={styles.inputContainer}>
 							<Field
 								name="password"
+								as={Input}
 								validate={validatePassword}
 								type={passwordVisibility}
 								placeholder="Password"
@@ -62,16 +68,15 @@ const Login = (props) => {
 							/>
 							<div className={styles.showPassword} onClick={passwordVisible}>
 								<img src={passwordIcon} alt="showPassword" />
-							</div>	
-							{errors.password && touched.password && <div className={styles.error}>{errors.password}</div>}
+							</div>
 						</div>
-						
 						<div className={styles.submitBlock}>
 							<label className={styles.checkboxInput}>
 								<Field type="checkbox" name="rememberMe" />
 								Remember me
 							</label>
-							<button type="submit" className={styles.submitButton}>Submit</button>
+							<div className={styles.error}>{status ? status.error : null}</div>
+							<button type="submit" disabled={isSubmitting} className={styles.submitButton}>Submit</button>
 						</div>
 					</Form>
 				)}

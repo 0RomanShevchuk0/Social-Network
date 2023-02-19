@@ -14,7 +14,7 @@ const ProfileContainer = (props) => {
 		if(!userId) userId = props.authUserId;
 		
 		if(!props.router.params.userId && !props.authUserId) {
-			navigate("/messages");
+			return navigate("/login");
 		}
 		props.setUserProfile(userId);
 		props.getUserStatus(userId);

@@ -8,13 +8,19 @@ import Profile from "./Profile";
 
 
 const ProfileContainer = (props) => {
+	let navigate = useNavigate();
 	useEffect(() => {
 		let userId = props.router.params.userId;
 		if(!userId) userId = props.authUserId;
 		
+		if(!props.router.params.userId && !props.authUserId) {
+			navigate("/messages");
+		}
 		props.setUserProfile(userId);
 		props.getUserStatus(userId);
-	}, [props.authUserId]);
+	}, [props.authUserId, props.router.params.userId]);
+	
+	
 
 	return <Profile {...props} />;
 };

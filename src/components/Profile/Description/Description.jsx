@@ -1,6 +1,6 @@
 import styles from "./Description.module.scss";
 
-import defaultBackgroundrImg from "./../../../assets/img/panda.jpg";
+import defaultBackgroundImg from "./../../../assets/img/panda.jpg";
 import defaultAvatarImg from "../../../assets/img/DialogPersone.png";
 
 import ProfileStatus from "./ProfileStatus";
@@ -10,15 +10,15 @@ const Description = (props) => {
   return (
     <div className={styles.description}>
       <div className={styles.main}>
-        <div className={styles.backgroungImgWrapper}>
+        <div className={styles.backgroundImgWrapper}>
           <img
-            className={styles.backgroungImg}
+            className={styles.backgroundImg}
             src={
               props.profile.photos.large
                 ? props.profile.photos.large
-                : defaultBackgroundrImg
+                : defaultBackgroundImg
             }
-            alt="backgroungImage"
+            alt="backgroundImage"
           />
         </div>
         <div className={styles.content}>

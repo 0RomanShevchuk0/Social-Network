@@ -1,7 +1,11 @@
-import styles from "./DialogsContent.module.scss";
-import sendButton from "./../../../assets/img/sendButton.png";
+import { Field, Form, Formik } from "formik";
 
 import Message from "./Message/Message";
+
+import styles from "./DialogsContent.module.scss";
+import sendButton from "./../../../assets/img/sendButton.png";
+import { validateNewMessage } from "../../../common/validator";
+
 
 const DialogsContent = (props) => {
 
@@ -9,31 +13,32 @@ const DialogsContent = (props) => {
 		<Message message={item.message} key={item.id} />
 	));
 
-	const onAddMessage = () => {
-		props.addMessage();
-	}
-
-	const onMessageTextChange = (e) => {
-		let newText = e.target.value;
-		props.updateNewMessageText(newText);
-	}
-
-
   return (
-    <div className={styles.DialogsContent}>
-      <div className={styles.messages}>
+		<div className={styles.DialogsContent}>
+			<div className={styles.messages}>
 				{dialogsContentItems}
 			</div>
-			<div className={styles.sendingItems}>
-				<textarea 
-					placeholder="Your message..."
-					className={styles.messageInput}
-					onChange={onMessageTextChange}
-					value={props.newMessageText}
-				/>
-				<img onClick={onAddMessage} className={styles.sendButton} src={sendButton} alt="sendButton"/>
-			</div>
-    </div>
+				<Formik 
+					initialValues={{newMessage: ""}}
+					onSubmit={(values, { resetForm }) => {
+						props.addMessage(values.newMessage);
+						resetForm();
+					}}
+				>
+					{({ errors, touched }) => (
+					<Form className={styles.sendingItems}>
+						{errors.newMessage && touched.newMessage && <div className={styles.error}>{errors.newMessage}</div>}
+						<Field 
+							as="textarea"
+							name="newMessage"
+							validate={validateNewMessage}
+							placeholder="Your message..."
+							className={styles.messageInput}
+						/>
+						<button type="submit" className={styles.sendButton}><img src={sendButton} alt="sendButton" /></button>
+					</Form>)}
+				</Formik>
+		</div>
   );
 };
 

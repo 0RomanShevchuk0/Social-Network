@@ -1,32 +1,36 @@
+import { Formik, Form, Field } from 'formik';
+import { validateNewPost } from '../../../../common/validator';
+
 import styles from "./AddPost.module.scss";
 
 
 const AddPost = (props) => {
-
-	const onAddPost = () => {
-		props.addPost();
-	}
-
-	const onPostTextChange = (e) => {
-		let newText = e.target.value;
-		props.updateNewPostText(newText);
-	}
-	
   return (
-    <div className={styles.addPost}>
-      <textarea 
-				placeholder="Your text..." 
-				className={styles.addText} 
-				onChange={onPostTextChange} 
-				value={props.newPostText} 
-			/>
-
-      <div className={styles.buttons}>
-        <button className={`${styles.cancelButton} ${styles.button}`}>Cansel</button>
-        <button onClick={onAddPost} className={`${styles.addButton} ${styles.button}`}>Add post</button>
-      </div>
-    </div>
+		<Formik
+			initialValues={{addPost: ""}}
+			onSubmit={(values, { resetForm }) => {
+				props.addPost(values.addPost);
+				resetForm();
+			}}
+		>
+			{({ errors, touched, isSubmitting }) => (
+			<Form className={styles.addPost}>
+				<Field 
+					validate={validateNewPost}
+					name="addPost"
+					className={styles.addText} 
+					as="textarea"
+					placeholder="Your text..."
+				/>
+				{errors.addPost && touched.addPost && <div className={styles.error}>{errors.addPost}</div>}
+				<div className={styles.buttons}>
+					<button className={`${styles.cancelButton} ${styles.button}`}>Cancel</button>
+					<button type='submit' disabled={isSubmitting} className={`${styles.addButton} ${styles.button}`}>Add post</button>
+				</div>
+			</Form>)}
+		</Formik>
   );
 };
+
 
 export default AddPost;

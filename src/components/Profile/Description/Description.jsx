@@ -3,6 +3,8 @@ import styles from "./Description.module.scss";
 import defaultBackgroundrImg from "./../../../assets/img/panda.jpg";
 import defaultAvatarImg from "../../../assets/img/DialogPersone.png";
 
+import ProfileStatus from "./ProfileStatus";
+
 
 const Description = (props) => {
   return (
@@ -33,7 +35,9 @@ const Description = (props) => {
           </div>
           <div className={styles.userInfo}>
             <div className={styles.fullName}>{props.profile.fullName}</div>
-            <div className={styles.about}>{props.profile.aboutMe}</div>
+            <div className={styles.about}>
+							<ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus} />
+						</div>
           </div>
         </div>
       </div>

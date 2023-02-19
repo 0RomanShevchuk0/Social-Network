@@ -30,4 +30,5 @@ const mapStateToProps = (state) => {
   };
 };
 
+
 export default connect(mapStateToProps, { getUsers, follow, unfollow })(UsersContainer);

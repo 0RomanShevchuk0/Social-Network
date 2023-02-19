@@ -1,14 +1,17 @@
 import styles from "./Messages.module.scss";
 
-import DialogsContainer from "./Dialogs/DialogsContainer";
-import DialogsContentContainer from "./DialogsContent/DialogsContentContainer";
+import Dialogs from "./Dialogs/Dialogs";
+import DialogsContent from "./DialogsContent/DialogsContent";
 
 
 const Messages = (props) => {
   return (
     <div className={styles.messagesWrapper}>
-      <DialogsContainer store={props.store} />
-      <DialogsContentContainer store={props.store} />
+      <Dialogs dialogs={props.dialogs} />
+      <DialogsContent 
+				messages={props.messages} newMessageText={props.newMessageText} 
+				updateNewMessageText={props.updateNewMessageText} addMessage={props.addMessage} 
+			/>
     </div>
   );
 };

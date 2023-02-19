@@ -11,13 +11,21 @@ const Header = (props) => {
     <header className={styles.header}>
       <img className={styles.logoImage} src={logoImage} alt="logoImage" />
 
-			<div className={styles.login}>
-				<img className={styles.userPhoto} src={props.userPhoto ? props.userPhoto : defaultUserPhoto} alt="User Photo" />
-				{props.login ? props.login :
-				<NavLink className={styles.toLogin} to="/login">Login</NavLink>}
+			<div className={styles.loginWrapper}>
+				{props.isAuth ? <LoggedIn {...props} /> : <NavLink className={styles.toLogin} to="/login">Login</NavLink> }
 			</div>
     </header>
   );
+}
+
+const LoggedIn = (props) => {
+	return (
+		<div className={styles.login}>
+		<img className={styles.userPhoto} src={props.userPhoto ? props.userPhoto : defaultUserPhoto} alt="User Photo" />
+			{props.login}
+			<button onClick={props.logout}>Log Out</button>
+		</div>
+	)
 }
 
 

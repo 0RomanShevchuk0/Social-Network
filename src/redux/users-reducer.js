@@ -72,9 +72,9 @@ export const getUsers = (currentPage, pageSize) => {
 		dispatch(setIsLoading(true));
 		dispatch(setCurrentPage(currentPage));
     usersAPI.getUsers(currentPage, pageSize).then((data) => {
-			dispatch(setIsLoading(false));
 			dispatch(setUsers(data.items));
 			dispatch(setTotalUsersCount(data.totalCount));
+			dispatch(setIsLoading(false));
 		});
 	}
 }

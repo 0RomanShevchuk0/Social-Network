@@ -29,8 +29,12 @@
 		width: 30px;
 		border-radius: 50%;
 	}
-	.toLogin {
-		color: rgb(229, 216, 216);
-		text-decoration: none;
+}
+.toLogin {
+	color: rgb(229, 216, 216);
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
 	}
 }

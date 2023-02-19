@@ -28,11 +28,30 @@ export const usersAPI = {
 export const authAPI = {
 	auth() {
 		return instance.get('auth/me');
+	},
+
+	async login(email, password, rememberMe) {
+		const response = await instance.post('auth/login', {email, password, rememberMe});
+		return response.data;
+	},
+
+	logout() {
+		return instance.delete('auth/login');
 	}
 };
 export const profileAPI = {
 	async getProfile(userId) {
 		const response = await instance.get(`profile/${userId}`);
 		return response.data;
+	},
+
+	async getStatus(userId) {
+		const response = await instance.get(`profile/status/${userId}`);
+		return response.data;
+	},
+
+	updateStatus(status) {
+		return instance.put('profile/status', {status: status});
 	}
 };
+

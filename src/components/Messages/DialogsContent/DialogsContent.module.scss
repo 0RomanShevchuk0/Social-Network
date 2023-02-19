@@ -21,7 +21,15 @@
 	}
 
 	.sendButton {
+		background: none;
+		border: none;
 		cursor: pointer;
 		height: 32px;
 	}
+}
+
+.error {
+	margin-top: -70px;
+	position: absolute;
+	color: red;
 }

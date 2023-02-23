@@ -2,6 +2,9 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 
 import { getUsers, follow, unfollow } from "../../redux/users-reducer";
+import { getCurrentPage, getFollowingProgress, 
+	getIsLoading, getPageSize, getTotalUsersCount, 
+	getUsersSelector } from "../../redux/users-selectors";
 import Users from "./Users";
 
 
@@ -21,12 +24,12 @@ const UsersContainer = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    pageSize: state.usersPage.pageSize,
-    currentPage: state.usersPage.currentPage,
-    isLoading: state.usersPage.isLoading,
-    followingProgress: state.usersPage.followingProgress,
+    users: getUsersSelector(state),
+    totalUsersCount: getTotalUsersCount(state),
+    pageSize: getPageSize(state),
+    currentPage: getCurrentPage(state),
+    isLoading: getIsLoading(state),
+    followingProgress: getFollowingProgress(state),
   };
 };
 

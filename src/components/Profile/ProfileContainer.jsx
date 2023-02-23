@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
-import { updateUserStatus, getUserStatus, setUserProfile, addPost } from "../../redux/profile-reducer";
+import { updateUserStatus, getUserStatus, setUserProfile, addPost, updateUserPhoto } from "../../redux/profile-reducer";
 import Profile from "./Profile";
 
 
@@ -30,8 +30,8 @@ const mapStateToProps = (state) => {
 	return {
 		profile: state.profilePage.profile,
 		posts: state.profilePage.posts,
-		status: state.profilePage.status,
 		authUserId: state.auth.id,
+		status: state.profilePage.status
 	}
 }
 
@@ -52,6 +52,6 @@ function withRouter(Component) {
 }
 	
 export default compose(
-	connect(mapStateToProps, { updateUserStatus, getUserStatus, setUserProfile, addPost }),
+	connect(mapStateToProps, { updateUserStatus, getUserStatus, setUserProfile, addPost ,updateUserPhoto }),
 	withRouter
 )(ProfileContainer);

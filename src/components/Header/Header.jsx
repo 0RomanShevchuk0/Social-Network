@@ -12,7 +12,7 @@ const Header = (props) => {
       <img className={styles.logoImage} src={logoImage} alt="logoImage" />
 
 			<div className={styles.loginWrapper}>
-				{props.isAuth ? <LoggedIn {...props} /> : <NavLink className={styles.toLogin} to="/login">Login</NavLink> }
+				{props.isAuth ? <LoggedIn {...props} /> : <NavLink className={styles.toLogin} to="/login">Log In</NavLink> }
 			</div>
     </header>
   );
@@ -21,9 +21,12 @@ const Header = (props) => {
 const LoggedIn = (props) => {
 	return (
 		<div className={styles.login}>
-		<img className={styles.userPhoto} src={props.userPhoto ? props.userPhoto : defaultUserPhoto} alt="User Photo" />
+			<img className={styles.userPhoto} src={props.profile ? 
+				props.profile.photos.small :
+				defaultUserPhoto} alt="User Photo" 
+			/>
 			{props.login}
-			<button onClick={props.logout}>Log Out</button>
+			<button className={styles.logOut} onClick={props.logout}>Log Out</button>
 		</div>
 	)
 }

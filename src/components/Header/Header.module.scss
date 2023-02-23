@@ -38,3 +38,20 @@
 		text-decoration: underline;
 	}
 }
+
+.logOut {
+	width: 70px;
+	height: 24px;
+	margin-left: 8px;
+	cursor: pointer;
+	background-color: rgb(173, 31, 31);
+	border-radius: 4px;
+	color: rgb(204, 191, 191);
+	border: none;
+	font-size: 14px;
+	transition: .2s;
+
+	&:hover {
+		background-color: rgb(201, 33, 33);
+	}
+}

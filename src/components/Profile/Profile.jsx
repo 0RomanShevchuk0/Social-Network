@@ -15,7 +15,10 @@ const Profile = (props) => {
 	}
   return (
     <div className={styles.profile}>
-      <Description profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus} />
+      <Description 
+				profile={props.profile} updateUserPhoto={props.updateUserPhoto}
+				status={props.status} updateUserStatus={props.updateUserStatus} 
+			/>
       <MyPosts
 				profile={props.profile} 
 				posts={props.posts} 

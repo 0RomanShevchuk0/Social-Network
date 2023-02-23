@@ -11,8 +11,8 @@ const HeaderContainer = (props) => {
 const mapStateToProps = (state) => {
 	return {
 		login: state.auth.login,
-		userPhoto: state.auth.userPhoto,
 		isAuth: state.auth.isAuth,
+		profile: state.profilePage.profile
 	}
 }
 

@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Social-Network/static/css/main.3b0729a3.css",
-    "main.js": "/Social-Network/static/js/main.9c775cb8.js",
+    "main.js": "/Social-Network/static/js/main.c5fc713c.js",
     "static/js/787.223550ad.chunk.js": "/Social-Network/static/js/787.223550ad.chunk.js",
     "static/media/skillet-hero.mp3": "/Social-Network/static/media/skillet-hero.98ed7994ce4cd9a93d01.mp3",
     "static/media/sea-shanty.mp3": "/Social-Network/static/media/sea-shanty.78099d55c24249eecfe3.mp3",
@@ -14,11 +14,11 @@
     "static/media/loader.svg": "/Social-Network/static/media/loader.5b39333a58ca8ed669495cd1ad9cd4c0.svg",
     "index.html": "/Social-Network/index.html",
     "main.3b0729a3.css.map": "/Social-Network/static/css/main.3b0729a3.css.map",
-    "main.9c775cb8.js.map": "/Social-Network/static/js/main.9c775cb8.js.map",
+    "main.c5fc713c.js.map": "/Social-Network/static/js/main.c5fc713c.js.map",
     "787.223550ad.chunk.js.map": "/Social-Network/static/js/787.223550ad.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3b0729a3.css",
-    "static/js/main.9c775cb8.js"
+    "static/js/main.c5fc713c.js"
   ]
 }

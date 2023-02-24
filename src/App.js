@@ -12,9 +12,7 @@ import Navbar from "./components/Navbar/Navbar";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import MessagesContainer from "./components/Messages/MessagesContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import News from "./components/News/News";
 import MusicContainer from "./components/Music/MusicContainer";
-import Settings from "./components/Settings/Settings";
 import Login from "./components/Login/Login";
 import Loader from "./common/Loader/Loader";
 
@@ -38,9 +36,7 @@ const App = (props) => {
 							<Route path="/profile/:userId?" element={<ProfileContainer store={props.store} />} />
 							<Route path="/messages/*" element={<MessagesContainer store={props.store} />} />
 							<Route path="/users" element={<UsersContainer store={props.store} />} />
-							<Route path="/news" element={<News />} />
 							<Route path="/music" element={<MusicContainer store={props.store} />} />
-							<Route path="/settings" element={<Settings />} />
 						</Routes>
 					</div>
 				</div>

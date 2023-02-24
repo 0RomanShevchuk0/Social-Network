@@ -30,13 +30,13 @@ const Navbar = () => {
 					</NavLink>
 				</li>
 
-        <li>
+        {/* <li>
 					<NavLink 
 						className={navData => navData.isActive ? [styles.item,styles.active].join(' ') : styles.item} 
 						to="/news">
 							News
 					</NavLink>
-				</li>
+				</li> */}
 
         <li>
 					<NavLink 
@@ -46,13 +46,13 @@ const Navbar = () => {
 					</NavLink>
 				</li>
 
-        <li>
+        {/* <li>
 					<NavLink 
 						className={navData => navData.isActive ? [styles.item,styles.active].join(' ') : styles.item} 
 						to="/settings">
 							Settings
 					</NavLink>
-				</li>
+				</li> */}
 
       </ul>
     </nav>

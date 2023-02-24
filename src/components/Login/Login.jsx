@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Formik, Form, Field } from 'formik';
 
-import { login } from '../../redux/auth-reducer';
+import { getCaptcha, login } from '../../redux/auth-reducer';
 import { validateLogin, validatePassword } from '../../common/validator';
 
 import styles from "./Login.module.scss";
@@ -18,10 +18,15 @@ const Login = (props) => {
 	const [passwordIcon, setPasswordIcon] = useState(showPassword);
 
 	function submit(values, submitProps) {
-		props.login(values.email, values.password, values.rememberMe, submitProps.setStatus).then(() => {
+		props.login(values.email, values.password, values.rememberMe, values.captcha, submitProps.setStatus)
+		.then((response) => {
+			if(response === "captcha") {
+				props.getCaptcha().then(() => {
+					submitProps.setFieldValue("captcha", "");
+				});
+			}
 			submitProps.setSubmitting(false);
 		});
-		
 	}
 	
 	function passwordVisible() {
@@ -35,16 +40,16 @@ const Login = (props) => {
 		}
 	}
 	
-	if(props.isAuth) return <Navigate to="/profile"/>
+	if(props.isAuth) return <Navigate to="/profile"/>;
 
 	return(
 		<div className={styles.wrapper}>
 			<h1>Login</h1>
 			<Formik
-				initialValues={{ email: "", password: "", rememberMe: false }}
+				initialValues={{ email: "", password: "", rememberMe: false, captcha: "" }}
 				onSubmit={submit}
 			>
-				{({ errors, touched, isSubmitting, status }) => (
+				{({ isSubmitting, status }) => (
 					<Form className={styles.loginForm}>
 						<div className={styles.inputContainer}>
 							<Field
@@ -76,6 +81,7 @@ const Login = (props) => {
 								Remember me
 							</label>
 							<div className={styles.error}>{status ? status.error : null}</div>
+							{props.captchaImg && <Captcha captchaImg={props.captchaImg} /> }
 							<button type="submit" disabled={isSubmitting} className={styles.submitButton}>Submit</button>
 						</div>
 					</Form>
@@ -84,11 +90,27 @@ const Login = (props) => {
 		</div>
 	);
 }
+
+function Captcha(props) {
+	return (
+		<div className="">
+			<img src={props.captchaImg} alt="captcha" />
+			<Field
+				name="captcha"
+				as={Input}
+				placeholder="Captcha"
+				className={styles.passwordInput}
+			/>
+		</div>
+	)
+}
+
 const mapStateToProps = (state) => {
 	return {
-		isAuth: state.auth.isAuth
+		isAuth: state.auth.isAuth,
+		captchaImg: state.auth.captchaImg
 	}
 }
 
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { login, getCaptcha })(Login);

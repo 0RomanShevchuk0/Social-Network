@@ -1,6 +1,7 @@
 import { authAPI } from "../API/api";
 
 const SET_AUTH_USER_INFO = 'SET-AUTH-USER-INFO';
+const SET_CAPTCHA_IMAGE = 'SET_CAPTCHA_IMAGE';
 
 
 let initialState = {
@@ -8,6 +9,7 @@ let initialState = {
 	id: null,
 	email: null,
 	isAuth: false,
+	captchaImg: null
 };
 
 
@@ -19,6 +21,12 @@ const authReducer = (state = initialState, action) => {
 				...action.data
 			}
 
+		case SET_CAPTCHA_IMAGE:
+			return { 
+				...state, 
+				captchaImg: action.captchaImg
+			}
+
     default:
       return state;
   }
@@ -26,6 +34,7 @@ const authReducer = (state = initialState, action) => {
 
 
 const setAuthUserData = (login, id, email, isAuth) => ({ type: SET_AUTH_USER_INFO, data: {login, id, email, isAuth} });
+const setCaptchaImage = (captchaImg) => ({ type: SET_CAPTCHA_IMAGE, captchaImg });
 
 export const getAuthUserData = () => {
 	return (dispatch) => {
@@ -38,14 +47,18 @@ export const getAuthUserData = () => {
 	}
 }
 
-export const login = (email, password, rememberMe, setStatus) => {
+export const login = (email, password, rememberMe, captcha , setStatus) => {
 	return (dispatch) => {
-		return authAPI.login(email, password, rememberMe).then(response => {
+		return authAPI.login(email, password, rememberMe, captcha).then(response => {
 			if(response.resultCode === 0) {
-				dispatch(setAuthUserData());
+				dispatch(getAuthUserData());
+				dispatch(setCaptchaImage(null));
+			}
+			else if(response.resultCode === 10) {
+				return "captcha"
 			}
 			else {
-				setStatus({error: response.messages[0]})
+				setStatus({error: response.messages[0]});
 			}
 		});
 	}
@@ -58,6 +71,14 @@ export const logout = () => {
 				dispatch(setAuthUserData(null, null, null, false, null));
 			}
 		});
+	}
+}
+
+export const getCaptcha = () => {
+	return (dispatch) => {
+		return authAPI.captcha().then((response) => {
+			dispatch(setCaptchaImage(response.data.url));
+		})
 	}
 }
 

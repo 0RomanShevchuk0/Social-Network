@@ -21,9 +21,13 @@ const Header = (props) => {
 const LoggedIn = (props) => {
 	return (
 		<div className={styles.login}>
-			<img className={styles.userPhoto} src={props.profile ? 
-				props.profile.photos.small :
-				defaultUserPhoto} alt="User Photo" 
+			<img 
+				className={styles.userPhoto} 
+				src={(props.profile && props.profile.photos.small) ? 
+					props.profile.photos.small :
+					defaultUserPhoto
+				} 
+				alt="User Photo" 
 			/>
 			{props.login}
 			<button className={styles.logOut} onClick={props.logout}>Log Out</button>

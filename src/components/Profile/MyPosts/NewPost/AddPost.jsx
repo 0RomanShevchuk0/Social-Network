@@ -24,7 +24,6 @@ const AddPost = (props) => {
 				/>
 				{errors.addPost && touched.addPost && <div className={styles.error}>{errors.addPost}</div>}
 				<div className={styles.buttons}>
-					<button className={`${styles.cancelButton} ${styles.button}`}>Cancel</button>
 					<button type='submit' disabled={isSubmitting} className={`${styles.addButton} ${styles.button}`}>Add post</button>
 				</div>
 			</Form>)}

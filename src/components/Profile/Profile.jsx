@@ -13,6 +13,7 @@ const Profile = (props) => {
 			</div>
 		)
 	}
+
   return (
     <div className={styles.profile}>
       <Description 

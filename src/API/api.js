@@ -30,13 +30,17 @@ export const authAPI = {
 		return instance.get('auth/me');
 	},
 
-	async login(email, password, rememberMe) {
-		const response = await instance.post('auth/login', {email, password, rememberMe});
+	async login(email, password, rememberMe, captcha) {
+		const response = await instance.post('auth/login', {email, password, rememberMe, captcha});
 		return response.data;
 	},
 
 	logout() {
 		return instance.delete('auth/login');
+	},
+
+	captcha() {
+		return instance.get('security/get-captcha-url');
 	}
 };
 export const profileAPI = {

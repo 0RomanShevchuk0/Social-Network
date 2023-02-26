@@ -47,6 +47,7 @@
 	}
 }
 
+// Photo
 .uploadPhoto {
 	display: flex;
 	justify-content: center;
@@ -64,6 +65,7 @@
 	border-radius: 12px;
 	z-index: 100;
 
+	// Pop up
 	.form {
 		display: flex;
 		flex-direction: column;
@@ -91,9 +93,28 @@
 	display: none !important;
 }
 
+
 .preview {
 	height: 120px;
 	object-fit: contain;
 	border-radius: 12px;
 }
 
+
+.editStatus {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+
+	.confirmStatusChangeButton {
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 22px;
+		height: 22px;
+		img {
+			width: 20px;
+		}
+	}
+}

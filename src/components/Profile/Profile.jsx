@@ -24,6 +24,7 @@ const Profile = (props) => {
 				profile={props.profile} 
 				posts={props.posts} 
 				addPost={props.addPost}
+				deletePost={props.deletePost}
 			/>
     </div>
   );

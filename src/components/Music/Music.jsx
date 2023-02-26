@@ -1,7 +1,6 @@
 import styles from "./Music.module.scss"
 import Song from "./Song/Song";
 
-
 const Music = (props) => {
 	return (
 		<div className={styles.wrapper}>

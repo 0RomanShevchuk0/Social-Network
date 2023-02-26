@@ -1,7 +1,9 @@
-import styles from "./Post.module.scss";
-
 import defaultAvatar from "./../../../../assets/img/DialogPersone.png";
 import like from "./../../../../assets/img/like.png";
+import trashCan from "./../../../../assets/img/deletePost.png";
+
+import styles from "./Post.module.scss";
+
 
 const Post = (props) => {
   return (
@@ -17,11 +19,15 @@ const Post = (props) => {
 				</div>
       </div>
 
-      <div className={styles.reactions}>
-        <img className={styles.like} src={like} alt="" />{" "}
-        <span className={styles.likesCount}> {props.likesCount}</span>
-      </div>
-			
+			<div className={styles.manage}>
+				<button onClick={() => props.deletePost(props.id)} className={styles.deletePostButton} >
+					<img src={trashCan} alt="deletePost" />
+				</button>
+				<div className={styles.reactions}>
+					<img className={styles.like} src={like} alt="" />{" "}
+					<span className={styles.likesCount}> {props.likesCount}</span>
+				</div>
+			</div>
     </div>
   );
 };

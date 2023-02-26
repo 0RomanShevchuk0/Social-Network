@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { useState } from "react";
 
+import checkMark from "../../../assets/img/checkMark.png";
+
+import styles from "./Description.module.scss";
+
 
 const ProfileStatus = (props) => {
 	let [status, setStatus] = useState(props.status);
@@ -10,7 +14,7 @@ const ProfileStatus = (props) => {
 		if(status !== props.status) setStatus(props.status);
 	}, [props.status]);
 
-	function onBlur() {
+	function handleSubmit() {
 		props.updateUserStatus(status);
 		setStatusEditMode(false);
 	}
@@ -19,14 +23,42 @@ const ProfileStatus = (props) => {
 		setStatus(e.target.value);
 	}
 
+	function removeStatusEditMode() {
+		setTimeout(() => {
+			setStatusEditMode(false);
+			setStatus(props.status);
+		}, 100)
+	}
+
+	function handleKeyDown(event) {
+    if (event.key === 'Enter') {
+			handleSubmit();
+    }
+  };
+
   return (
-		<div className="">
+		<div>
 			{ statusEditMode ? 
-				<div>
-					<input onChange={(e) => onStatusTextChange(e)} type="text" value={status} autoFocus={true} onBlur={() => onBlur()} />
+				<div className={styles.editStatus}>
+					<input 
+						onChange={onStatusTextChange} 
+						onBlur={removeStatusEditMode}
+						onKeyDown={handleKeyDown}
+						value={status} 
+						type="text" 
+						autoFocus={true} 
+					/>
+					<button 
+						className={styles.confirmStatusChangeButton}
+						onClick={handleSubmit}
+					>
+						<img src={checkMark} alt="confirm" />
+					</button>
 				</div> :
 				<div>
-					<span onDoubleClick={() => setStatusEditMode(true)} >{props.status ? props.status : 'status'}</span>
+					<div onClick={() => setStatusEditMode(true)} >
+						{props.status ? props.status : 'status'}
+					</div>
 				</div> 
 			}
 		</div>

@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
-import { updateUserStatus, getUserStatus, setUserProfile, addPost, updateUserPhoto } from "../../redux/profile-reducer";
+import { updateUserStatus, getUserStatus, setUserProfile, 
+	addPost, deletePost, updateUserPhoto } from "../../redux/profile-reducer";
 import Profile from "./Profile";
 
 
@@ -52,6 +53,8 @@ function withRouter(Component) {
 }
 	
 export default compose(
-	connect(mapStateToProps, { updateUserStatus, getUserStatus, setUserProfile, addPost ,updateUserPhoto }),
+	connect(mapStateToProps, { updateUserStatus, getUserStatus, setUserProfile, 
+		addPost, deletePost ,updateUserPhoto 
+	}),
 	withRouter
 )(ProfileContainer);

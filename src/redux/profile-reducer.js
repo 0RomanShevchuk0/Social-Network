@@ -1,6 +1,7 @@
 import { profileAPI } from "../API/api";
 
 const ADD_POST = "ADD-POST";
+const DELETE_POST = "DELETE_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 const SET_PHOTOS = "SET_PHOTOS";
@@ -15,7 +16,7 @@ let initialState = {
     },
     {
       id: "2",
-      content: "I'm so hungry...",
+      content: "I'm starving...",
       likesCount: "17",
     },
   ],
@@ -27,7 +28,7 @@ let addPostId = 3;
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST:{
+    case ADD_POST: {
 				let newPost = {
 					id: addPostId,
           content: action.newPostText,
@@ -36,8 +37,15 @@ const profileReducer = (state = initialState, action) => {
 				addPostId++;
 				return {
 					...state,
-					posts : [newPost, ...state.posts]
+					posts: [newPost, ...state.posts]
 				}
+		}
+
+		case DELETE_POST: {
+			return {
+				...state,
+				posts: state.posts.filter((post) => post.id !== action.postId)
+			}
 		}
 
     case SET_USER_PROFILE: {
@@ -58,7 +66,10 @@ const profileReducer = (state = initialState, action) => {
 };
 
 
+export default profileReducer;
+
 export const addPost = (newPostText) => ({type: ADD_POST, newPostText});
+export const deletePost = (postId) => ({type: DELETE_POST, postId});
 const setUserProfileSuccess = (profile) => ({type: SET_USER_PROFILE, profile});
 const setStatus = (status) => ({type: SET_STATUS, status});
 const setPhotos = (photos) => ({type: SET_PHOTOS, photos});
@@ -99,5 +110,3 @@ export const updateUserPhoto = (image) => {
 		});
 	}
 }
-
-export default profileReducer;

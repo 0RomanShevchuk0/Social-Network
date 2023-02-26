@@ -11,6 +11,8 @@ const MyPosts = (props) => {
 		content={post.content} 
 		likesCount={post.likesCount} 
 		key={post.id} 
+		id={post.id} 
+		deletePost={props.deletePost}
 	/>);
 	
   return (

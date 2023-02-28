@@ -17,16 +17,13 @@ const Login = (props) => {
 	const [passwordVisibility, setPasswordVisibility] = useState("password");
 	const [passwordIcon, setPasswordIcon] = useState(showPassword);
 
-	function submit(values, submitProps) {
-		props.login(values.email, values.password, values.rememberMe, values.captcha, submitProps.setStatus)
-		.then((response) => {
-			if(response === "captcha") {
-				props.getCaptcha().then(() => {
-					submitProps.setFieldValue("captcha", "");
-				});
-			}
-			submitProps.setSubmitting(false);
-		});
+	async function handleSubmit(values, submitProps) {
+		const response = await props.login(values.email, values.password, values.rememberMe, values.captcha, submitProps.setStatus)
+		if(response === "captcha") {
+			await props.getCaptcha();
+			submitProps.setFieldValue("captcha", "");
+		}
+		submitProps.setSubmitting(false);
 	}
 	
 	function passwordVisible() {
@@ -47,7 +44,7 @@ const Login = (props) => {
 			<h1>Login</h1>
 			<Formik
 				initialValues={{ email: "", password: "", rememberMe: false, captcha: "" }}
-				onSubmit={submit}
+				onSubmit={handleSubmit}
 			>
 				{({ isSubmitting, status }) => (
 					<Form className={styles.loginForm}>

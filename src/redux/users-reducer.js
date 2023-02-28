@@ -68,34 +68,38 @@ export const setIsLoading = (isLoading) => ({type : SET_IS_LOADING, isLoading});
 export const setFollowingProgress = (isLoading, userId) => ({type : TOGGLE_FOLLOWING_PROGRESS, isLoading, userId});
 
 export const getUsers = (currentPage, pageSize) => {
-	return (dispatch) => {
+	return async (dispatch) => {
 		dispatch(setIsLoading(true));
 		dispatch(setCurrentPage(currentPage));
-    usersAPI.getUsers(currentPage, pageSize).then((data) => {
-			dispatch(setUsers(data.items));
-			dispatch(setTotalUsersCount(data.totalCount));
-			dispatch(setIsLoading(false));
-		});
+		
+    const data = await usersAPI.getUsers(currentPage, pageSize);
+		dispatch(setUsers(data.items));
+		dispatch(setTotalUsersCount(data.totalCount));
+		dispatch(setIsLoading(false));
 	}
 }
+
+async function followUnfollowFlow(dispatch, apiMethod, actionCreator, userId) {
+	dispatch(setFollowingProgress(true, userId));
+		const response = await apiMethod(userId);
+		if(response.resultCode === 0) {
+			dispatch(actionCreator(userId));
+		}
+		dispatch(setFollowingProgress(false, userId));
+}
+
 export const follow = (userId) => {
 	return (dispatch) => {
-		dispatch(setFollowingProgress(true, userId));
-		usersAPI.follow(userId)
-		.then(() => {
-			dispatch(followSuccess(userId));
-			dispatch(setFollowingProgress(false, userId));
-		})
+		const apiMethod = usersAPI.follow;
+		const actionCreator = followSuccess;
+		followUnfollowFlow(dispatch, apiMethod, actionCreator, userId);
 	}
 }
 export const unfollow = (userId) => {
 	return (dispatch) => {
-		dispatch(setFollowingProgress(true, userId));
-		usersAPI.unfollow(userId)
-		.then(() => {
-			dispatch(unfollowSuccess(userId));
-			dispatch(setFollowingProgress(false, userId));
-		})
+		const apiMethod = usersAPI.unfollow;
+		const actionCreator = unfollowSuccess;
+		followUnfollowFlow(dispatch, apiMethod, actionCreator, userId);
 	}
 }
 

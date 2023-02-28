@@ -48,37 +48,34 @@ export const getAuthUserData = () => {
 }
 
 export const login = (email, password, rememberMe, captcha , setStatus) => {
-	return (dispatch) => {
-		return authAPI.login(email, password, rememberMe, captcha).then(response => {
-			if(response.resultCode === 0) {
-				dispatch(getAuthUserData());
-				dispatch(setCaptchaImage(null));
-			}
-			else if(response.resultCode === 10) {
-				return "captcha"
-			}
-			else {
-				setStatus({error: response.messages[0]});
-			}
-		});
+	return async (dispatch) => {
+		const response = await authAPI.login(email, password, rememberMe, captcha);
+		if (response.resultCode === 0) {
+			dispatch(getAuthUserData());
+			dispatch(setCaptchaImage(null));
+		}
+		else if (response.resultCode === 10) {
+			return "captcha";
+		}
+		else {
+			setStatus({ error: response.messages[0] });
+		}
 	}
 }
 
 export const logout = () => {
-	return (dispatch) => {
-		authAPI.logout().then(response => {
-			if(response.data.resultCode === 0) {
-				dispatch(setAuthUserData(null, null, null, false, null));
-			}
-		});
+	return async (dispatch) => {
+		const response = await authAPI.logout();
+		if(response.data.resultCode === 0) {
+			dispatch(setAuthUserData(null, null, null, false, null));
+		}
 	}
 }
 
 export const getCaptcha = () => {
-	return (dispatch) => {
-		return authAPI.captcha().then((response) => {
-			dispatch(setCaptchaImage(response.data.url));
-		})
+	return async (dispatch) => {
+		const response = await authAPI.captcha();
+		dispatch(setCaptchaImage(response.data.url));
 	}
 }
 

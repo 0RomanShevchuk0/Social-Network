@@ -1,0 +1,31 @@
+.paginationContainer {
+	margin-top: 40px;
+	padding: 10px 0px;
+	display: flex;
+	justify-content: center;
+
+	.pagination {
+		cursor: pointer;
+		padding: 0px 10px;
+		color: rgb(185, 173, 173);
+	}	
+}
+
+.currentPage {
+	font-weight: bold;
+	color: rgb(255, 255, 255) !important;
+}
+
+.navigate {
+	cursor: pointer;
+	background: none;
+	border: none;
+
+	&:disabled {
+		cursor: not-allowed;
+	}
+
+	.navigateArrow {
+		width: 20px;
+	}
+}

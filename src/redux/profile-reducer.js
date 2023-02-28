@@ -76,37 +76,33 @@ const setPhotos = (photos) => ({type: SET_PHOTOS, photos});
 
 
 export const setUserProfile = (userId) => {
-	return (dispatch) => {
-		profileAPI.getProfile(userId)
-		.then(response => dispatch(setUserProfileSuccess(response)));
+	return async (dispatch) => {
+		const response = await profileAPI.getProfile(userId);
+		dispatch(setUserProfileSuccess(response));
 	}
 }
 
 export const getUserStatus = (userId) => {
-	return (dispatch) => {
-		profileAPI.getStatus(userId)
-		.then(response => dispatch(setStatus(response)));
+	return async (dispatch) => {
+		const response = await profileAPI.getStatus(userId);
+		dispatch(setStatus(response));
 	}
 }
 
 export const updateUserStatus = (status) => {
-	return (dispatch) => {
-		profileAPI.updateStatus(status)
-		.then(response => {
-			if(response.data.resultCode === 0) {
-				dispatch(setStatus(status));
-			}
-		});
+	return async (dispatch) => {
+		const response = await profileAPI.updateStatus(status);
+		if(response.data.resultCode === 0) {
+			dispatch(setStatus(status));
+		}
 	}
 }
 
 export const updateUserPhoto = (image) => {
-	return (dispatch) => {
-		profileAPI.updateAvatar(image)
-		.then((response) => {
-			if(response.data.resultCode === 0) {
-				dispatch(setPhotos(response.data.data.photos));
-			}
-		});
+	return async (dispatch) => {
+		const response = await profileAPI.updateAvatar(image);
+		if(response.data.resultCode === 0) {
+			dispatch(setPhotos(response.data.data.photos));
+		}
 	}
 }

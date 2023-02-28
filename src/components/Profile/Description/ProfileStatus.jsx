@@ -45,6 +45,7 @@ const ProfileStatus = (props) => {
 						onBlur={removeStatusEditMode}
 						onKeyDown={handleKeyDown}
 						value={status} 
+						className={styles.statusInput}
 						type="text" 
 						autoFocus={true} 
 					/>

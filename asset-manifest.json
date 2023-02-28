@@ -1,7 +1,9 @@
 {
   "files": {
-    "main.css": "/Social-Network/static/css/main.17aac4c9.css",
-    "main.js": "/Social-Network/static/js/main.462aa6c6.js",
+    "main.css": "/Social-Network/static/css/main.ed760917.css",
+    "main.js": "/Social-Network/static/js/main.952be216.js",
+    "static/css/596.c2dc45df.chunk.css": "/Social-Network/static/css/596.c2dc45df.chunk.css",
+    "static/js/596.09dfd11a.chunk.js": "/Social-Network/static/js/596.09dfd11a.chunk.js",
     "static/js/787.223550ad.chunk.js": "/Social-Network/static/js/787.223550ad.chunk.js",
     "static/media/skillet-hero.mp3": "/Social-Network/static/media/skillet-hero.98ed7994ce4cd9a93d01.mp3",
     "static/media/sea-shanty.mp3": "/Social-Network/static/media/sea-shanty.78099d55c24249eecfe3.mp3",
@@ -13,12 +15,14 @@
     "static/media/show.png": "/Social-Network/static/media/show.180932f866861728bd41.png",
     "static/media/loader.svg": "/Social-Network/static/media/loader.5b39333a58ca8ed669495cd1ad9cd4c0.svg",
     "index.html": "/Social-Network/index.html",
-    "main.17aac4c9.css.map": "/Social-Network/static/css/main.17aac4c9.css.map",
-    "main.462aa6c6.js.map": "/Social-Network/static/js/main.462aa6c6.js.map",
+    "main.ed760917.css.map": "/Social-Network/static/css/main.ed760917.css.map",
+    "main.952be216.js.map": "/Social-Network/static/js/main.952be216.js.map",
+    "596.c2dc45df.chunk.css.map": "/Social-Network/static/css/596.c2dc45df.chunk.css.map",
+    "596.09dfd11a.chunk.js.map": "/Social-Network/static/js/596.09dfd11a.chunk.js.map",
     "787.223550ad.chunk.js.map": "/Social-Network/static/js/787.223550ad.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.17aac4c9.css",
-    "static/js/main.462aa6c6.js"
+    "static/css/main.ed760917.css",
+    "static/js/main.952be216.js"
   ]
 }

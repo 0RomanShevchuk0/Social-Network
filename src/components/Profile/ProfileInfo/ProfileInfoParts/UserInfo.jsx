@@ -14,15 +14,15 @@ const UserInfo = (props) => {
 				{ props.isProfileYours &&
 					<button
 						onClick={() => props.setIsProfileEditMode(true)}
-						title="Edit profile"
 						className={styles.editProfileButton}
+						title={"Edit profile"}
 					>
 					<img src={editIcon} alt="Edit" />
 					</button>
 				}
 			</div>
 
-			<div className={styles.statusContainer} title="Change status">
+			<div className={styles.statusContainer} title={props.isProfileYours && "Change status"}>
 				<ProfileStatus 
 					status={props.status} 
 					updateUserStatus={props.updateUserStatus} 

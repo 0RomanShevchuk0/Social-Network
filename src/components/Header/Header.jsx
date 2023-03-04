@@ -4,6 +4,7 @@ import styles from "./Header.module.scss";
 
 import logoImage from "./../../assets/img/logo.png";
 import defaultUserPhoto from "../../assets/img/DialogPersone.png";
+import logoutIcon from "./../../assets/img/logout-icon.png";
 
 
 const Header = (props) => {
@@ -30,7 +31,13 @@ const LoggedIn = (props) => {
 				alt="User Photo" 
 			/>
 			{props.login}
-			<button className={styles.logOut} onClick={props.logout}>Log Out</button>
+			<button 
+				onClick={props.logout}
+				className={styles.logOut}
+				title="LogOut" 
+			>
+				<img src={logoutIcon} alt="LogOut" />
+			</button>
 		</div>
 	)
 }

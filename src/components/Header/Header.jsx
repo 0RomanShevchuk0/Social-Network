@@ -23,8 +23,8 @@ const LoggedIn = (props) => {
 		<div className={styles.login}>
 			<img 
 				className={styles.userPhoto} 
-				src={(props.profile && props.profile.photos.small) ? 
-					props.profile.photos.small :
+				src={props.authProfilePhoto ? 
+					props.authProfilePhoto :
 					defaultUserPhoto
 				} 
 				alt="User Photo" 

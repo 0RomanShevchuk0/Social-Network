@@ -11,9 +11,9 @@ import store from "./redux/redux-store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <HashRouter>
-      <App store={store} />
-    </HashRouter>
+		<HashRouter>
+			<App store={store} />
+		</HashRouter>
   </React.StrictMode>
 );
 

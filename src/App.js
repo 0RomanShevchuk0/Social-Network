@@ -2,7 +2,7 @@ import React, { Suspense, useEffect } from "react";
 import { connect } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 
-import { getAuthUserData } from "./redux/auth-reducer";
+import { getAuthUserData, setAuthProfilePhoto } from "./redux/auth-reducer";
 import { initialize } from "./redux/app-reducer";
 
 import styles from "./app.module.scss";
@@ -21,6 +21,7 @@ const App = (props) => {
 
 	useEffect(() => {
 		props.initialize();
+		if(props.userId) props.setAuthProfilePhoto(props.userId);
 	}, [props.isAuth]);
 	
 	if(!props.initialized) return <Loader />
@@ -47,8 +48,9 @@ const App = (props) => {
 const mapStateToProps = (state) => {
 	return {
 		isAuth: state.auth.isAuth,
-		initialized: state.app.initialized
+		initialized: state.app.initialized,
+		userId: state.auth.id,
 	}
 }
 
-export default connect(mapStateToProps, { getAuthUserData, initialize })(App);
+export default connect(mapStateToProps, { getAuthUserData, initialize, setAuthProfilePhoto })(App);

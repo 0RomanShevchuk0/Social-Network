@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import styles from "./Description.module.scss";
+import styles from "../ProfileInfo.module.scss";
 
 
 const UploadImage = (props) => {

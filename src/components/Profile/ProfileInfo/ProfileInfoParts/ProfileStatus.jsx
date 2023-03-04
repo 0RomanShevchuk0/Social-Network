@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useState } from "react";
 
-import checkMark from "../../../assets/img/checkMark.png";
+import checkMark from "../../../../assets/img/checkMark.png";
 
-import styles from "./Description.module.scss";
+import styles from "../ProfileInfo.module.scss";
 
 
 const ProfileStatus = (props) => {
@@ -56,11 +56,12 @@ const ProfileStatus = (props) => {
 						<img src={checkMark} alt="confirm" />
 					</button>
 				</div> :
-				<div>
-					<div onClick={() => setStatusEditMode(true)} >
-						{props.status ? props.status : 'status'}
-					</div>
-				</div> 
+				<div 
+					onClick={props.isProfileYours ? () => setStatusEditMode(true) : null} 
+					style={{cursor: props.isProfileYours ? "pointer" : "default"}}
+				>
+					{props.status ? props.status : 'status'}
+				</div>
 			}
 		</div>
   );

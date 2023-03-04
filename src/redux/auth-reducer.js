@@ -1,7 +1,8 @@
-import { authAPI } from "../API/api";
+import { authAPI, profileAPI } from "../API/api";
 
 const SET_AUTH_USER_INFO = 'SET-AUTH-USER-INFO';
 const SET_CAPTCHA_IMAGE = 'SET_CAPTCHA_IMAGE';
+const SET_AUTH_PROFILE_PHOTO_SUCCESS = 'SET_AUTH_PROFILE_PHOTO';
 
 
 let initialState = {
@@ -9,7 +10,8 @@ let initialState = {
 	id: null,
 	email: null,
 	isAuth: false,
-	captchaImg: null
+	captchaImg: null,
+	authProfilePhoto: null
 };
 
 
@@ -27,23 +29,29 @@ const authReducer = (state = initialState, action) => {
 				captchaImg: action.captchaImg
 			}
 
+		case SET_AUTH_PROFILE_PHOTO_SUCCESS:
+			return { 
+				...state, 
+				authProfilePhoto: action.photo
+			}
+
     default:
       return state;
   }
 };
 
 
+const setAuthProfilePhotoSuccess = (photo) => ({ type: SET_AUTH_PROFILE_PHOTO_SUCCESS, photo });
 const setAuthUserData = (login, id, email, isAuth) => ({ type: SET_AUTH_USER_INFO, data: {login, id, email, isAuth} });
 const setCaptchaImage = (captchaImg) => ({ type: SET_CAPTCHA_IMAGE, captchaImg });
 
 export const getAuthUserData = () => {
-	return (dispatch) => {
-		return authAPI.me().then((authResponse) => {
-			if(authResponse.data.resultCode === 0) {
-				const { login, id, email } = authResponse.data.data;
-					dispatch(setAuthUserData(login, id, email, true));
-			}
-		});
+	return async (dispatch) => {
+		const authResponse = await authAPI.me();
+		if (authResponse.data.resultCode === 0) {
+			const { login, id, email } = authResponse.data.data;
+			dispatch(setAuthUserData(login, id, email, true));
+		}
 	}
 }
 
@@ -79,5 +87,11 @@ export const getCaptcha = () => {
 	}
 }
 
+export const setAuthProfilePhoto = (userId) => {
+	return async (dispatch) => {
+		const response = await profileAPI.getProfile(userId);
+		dispatch(setAuthProfilePhotoSuccess(response.photos.small));
+	}
+}
 
 export default authReducer;

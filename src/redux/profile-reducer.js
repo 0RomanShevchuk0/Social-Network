@@ -5,6 +5,7 @@ const DELETE_POST = "DELETE_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 const SET_PHOTOS = "SET_PHOTOS";
+const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
 
 
 let initialState = {
@@ -23,6 +24,7 @@ let initialState = {
 	profile: null,
 	status: "",
 };
+
 
 let addPostId = 3;
 
@@ -60,6 +62,10 @@ const profileReducer = (state = initialState, action) => {
 			return {...state, profile: {...state.profile, photos: action.photos}}
 		}
 
+    case UPDATE_PROFILE_SUCCESS: {
+			return {...state, profile: {...state.profile, ...action.updatedProfile}}
+		}
+
     default:
       return state;
   }
@@ -73,6 +79,7 @@ export const deletePost = (postId) => ({type: DELETE_POST, postId});
 const setUserProfileSuccess = (profile) => ({type: SET_USER_PROFILE, profile});
 const setStatus = (status) => ({type: SET_STATUS, status});
 const setPhotos = (photos) => ({type: SET_PHOTOS, photos});
+const updateProfileSuccess = (updatedProfile) => ({type: UPDATE_PROFILE_SUCCESS, updatedProfile});
 
 
 export const setUserProfile = (userId) => {
@@ -104,5 +111,18 @@ export const updateUserPhoto = (image) => {
 		if(response.data.resultCode === 0) {
 			dispatch(setPhotos(response.data.data.photos));
 		}
+	}
+}
+
+export const updateProfile = (updatedProfile, setStatus) => {
+	return async (dispatch) => {
+		const response = await profileAPI.updateProfile(updatedProfile);
+		if(response.data.resultCode === 0) {
+			dispatch(updateProfileSuccess(updatedProfile));
+		}
+		else {
+			setStatus({ error: response.data.messages[0] });
+		}
+		return response.data;
 	}
 }

@@ -62,6 +62,10 @@ export const profileAPI = {
 		const formData = new FormData();
 		formData.append("image", image);
 		return instance.put('profile/photo', formData);
+	},
+
+	updateProfile(updatedProfile) {
+		return instance.put('profile', updatedProfile);
 	}
 };
 

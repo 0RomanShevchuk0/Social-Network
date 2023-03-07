@@ -12,13 +12,7 @@ export function validateNewMessage(value) {
 	return error;
 }
 
-export function validateLogin(value) {
-	let error;
-	if(!value) error = "Required";
-	return error;
-}
-
-export function validatePassword(value) {
+export function RequiredField(value) {
 	let error;
 	if(!value) error = "Required";
 	return error;

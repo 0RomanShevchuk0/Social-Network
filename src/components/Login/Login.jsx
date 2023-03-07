@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Formik, Form, Field } from 'formik';
 
+import Captcha from './Captcha';
 import { getCaptcha, login } from '../../redux/auth-reducer';
-import { validateLogin, validatePassword } from '../../common/validator';
+import { RequiredField } from '../../common/validator';
 
 import styles from "./Login.module.scss";
 import showPassword from "../../assets/img/show.png";
@@ -18,7 +19,7 @@ const Login = (props) => {
 	const [passwordIcon, setPasswordIcon] = useState(showPassword);
 
 	async function handleSubmit(values, submitProps) {
-		const response = await props.login(values.email, values.password, values.rememberMe, values.captcha, submitProps.setStatus)
+		const response = await props.login(values.email, values.password, true, values.captcha, submitProps.setStatus)
 		if(response === "captcha") {
 			await props.getCaptcha();
 			submitProps.setFieldValue("captcha", "");
@@ -41,7 +42,7 @@ const Login = (props) => {
 
 	return(
 		<div className={styles.wrapper}>
-			<h1>Login</h1>
+			<h1>Social Network</h1>
 			<Formik
 				initialValues={{ email: "", password: "", rememberMe: false, captcha: "" }}
 				onSubmit={handleSubmit}
@@ -52,7 +53,7 @@ const Login = (props) => {
 							<Field
 								name="email"
 								as={Input}
-								validate={validateLogin}
+								validate={RequiredField}
 								type="email"
 								placeholder="Login"
 								className={styles.emailInput}
@@ -63,7 +64,7 @@ const Login = (props) => {
 							<Field
 								name="password"
 								as={Input}
-								validate={validatePassword}
+								validate={RequiredField}
 								type={passwordVisibility}
 								placeholder="Password"
 								className={styles.passwordInput}
@@ -73,34 +74,32 @@ const Login = (props) => {
 							</div>
 						</div>
 						<div className={styles.submitBlock}>
-							<label className={styles.checkboxInput}>
-								<Field type="checkbox" name="rememberMe" />
-								Remember me
-							</label>
 							<div className={styles.error}>{status ? status.error : null}</div>
 							{props.captchaImg && <Captcha captchaImg={props.captchaImg} /> }
-							<button type="submit" disabled={isSubmitting} className={styles.submitButton}>Submit</button>
+							<button type="submit" disabled={isSubmitting} className={styles.submitButton}>Log in</button>
 						</div>
 					</Form>
 				)}
 			</Formik>
+			<div className={styles.tip}>
+				<h4 
+					onClick={(e) => {e.target.nextElementSibling.classList.contains(styles.hidden) ?
+						e.target.nextElementSibling.classList.remove(styles.hidden) :
+						e.target.nextElementSibling.classList.add(styles.hidden)
+					}}
+				>
+					Don't have an account?
+				</h4>
+				<div className={`${styles.tipBody} ${styles.hidden}`}>
+					<div><span style={{fontWeight: "bold"}}>Login:</span> 0romanshevchuk0@gmail.com</div>
+					<div><span style={{fontWeight: "bold"}}>Password:</span> test</div>
+				</div>
+			</div>
 		</div>
 	);
 }
 
-function Captcha(props) {
-	return (
-		<div className="">
-			<img src={props.captchaImg} alt="captcha" />
-			<Field
-				name="captcha"
-				as={Input}
-				placeholder="Captcha"
-				className={styles.passwordInput}
-			/>
-		</div>
-	)
-}
+
 
 const mapStateToProps = (state) => {
 	return {

@@ -13,7 +13,7 @@ const Header = (props) => {
       <img className={styles.logoImage} src={logoImage} alt="logoImage" />
 
 			<div className={styles.loginWrapper}>
-				{props.isAuth ? <LoggedIn {...props} /> : <NavLink className={styles.toLogin} to="/login">Log In</NavLink> }
+				{props.isAuth ? <LoggedIn {...props} /> : <NavLink className={styles.toLogin} to="/login">Log in</NavLink> }
 			</div>
     </header>
   );
@@ -28,15 +28,15 @@ const LoggedIn = (props) => {
 					props.authProfilePhoto :
 					defaultUserPhoto
 				} 
-				alt="User Photo" 
+				alt="User" 
 			/>
 			{props.login}
 			<button 
 				onClick={props.logout}
 				className={styles.logOut}
-				title="LogOut" 
+				title="Log out" 
 			>
-				<img src={logoutIcon} alt="LogOut" />
+				<img src={logoutIcon} alt="Log out" />
 			</button>
 		</div>
 	)

@@ -7,7 +7,7 @@
 	justify-content: space-between;
 	align-items: center;
 	background: rgb(22, 22, 22);
-	border-bottom: 1px solid $border-color;
+	border-bottom: 1px solid $secondary-color;
 	border-top-left-radius: 12px;
 	border-top-right-radius: 12px;
 	box-sizing: border-box;
@@ -23,7 +23,7 @@
 	display: flex;
 	align-items: center;
 	color: rgb(229, 216, 216);
-	gap: 4px;
+	gap: 8px;
 	
 	.userPhoto {
 		width: 30px;

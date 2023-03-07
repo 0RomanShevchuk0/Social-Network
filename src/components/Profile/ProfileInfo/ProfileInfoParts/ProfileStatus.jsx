@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 import checkMark from "../../../../assets/img/checkMark.png";
+import { validateNewPost } from "../../../../common/validator";
 
 import styles from "../ProfileInfo.module.scss";
 
@@ -48,6 +49,7 @@ const ProfileStatus = (props) => {
 						className={styles.statusInput}
 						type="text" 
 						autoFocus={true} 
+						maxLength={80}
 					/>
 					<button 
 						className={styles.confirmStatusChangeButton}

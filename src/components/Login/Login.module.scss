@@ -6,6 +6,13 @@
 	padding: 10px 10px;
 }
 
+.loginForm {
+	padding: 20px 20px;
+	margin: 10px 0px;
+	border-radius: 12px;
+	box-shadow: 0px 0px 10px 1px rgb(76, 76, 76);
+}
+
 .inputContainer {
 	position: relative;
 }
@@ -20,7 +27,7 @@
 	height: 48px;
 	width: 320px;
 	font-size: 18px;
-	border-radius: 6px;
+	border-radius: 8px;
 	border: none;
 	box-sizing: border-box;
 }
@@ -35,14 +42,19 @@
 		width: 28px;
 	}
 }
-
-.checkboxInput {
+.captchaContainer {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	gap: 8px;
-	font-size: 16px;
-}
 
+	.captchaInput {
+		height: 32px;
+	}
+	.captchaImg {
+		width: 80%;
+	}
+}
+	
 .submitBlock {
 	display: flex;
 	flex-direction: column;
@@ -53,16 +65,48 @@
 		height: 36px;
 		width: 100px;
 		font-size: 18px;
-		border-radius: 6px;
+		border-radius: 8px;
 		align-self: center;
+		transition: 0.2s;
 
 		&:disabled {
 			background-color: rgb(213, 199, 199);
 			cursor: not-allowed;
 			border: none;
 		}
+
+		&:hover {
+			background-color: rgb(158, 155, 155);
+		}
 	}
 }
 .error {
 	color: red;
+}
+
+.tip {
+	color: rgb(145, 144, 144);
+	width: 360px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+	
+	h4 {
+		margin: 0px;
+		font-size: 16px;
+		cursor: pointer;
+	}
+	
+	.tipBody {
+		transition: 0.2s;
+		span {
+			margin: 0px 8px;
+			font-size: 16px;
+		}
+	}
+
+	.hidden {
+		opacity: 0;
+	}
 }

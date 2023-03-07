@@ -26,7 +26,7 @@ let initialState = {
     },
     {
       id: "3",
-      message: "We could go somewhere tonight if u don't mind",
+      message: "Bla-bla",
     },
   ]
 };

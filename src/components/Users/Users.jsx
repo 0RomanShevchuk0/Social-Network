@@ -14,8 +14,6 @@ const Users = (props) => {
 				avatarImg={user.photos.large}
         name={user.name}
         status={user.status}
-        country={"user.location.country"}
-        city={"user.location.city"}
 				followed={user.followed}
 
 				followingProgress={props.followingProgress}

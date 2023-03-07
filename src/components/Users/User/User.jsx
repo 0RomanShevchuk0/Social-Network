@@ -13,6 +13,7 @@ const User = (props) => {
           <img
             className={styles.avatarimg}
             src={props.avatarImg ? props.avatarImg : defaultPhoto}
+						title="View profile"
             alt="Avatar"
           />
         </NavLink>
@@ -20,16 +21,23 @@ const User = (props) => {
       <div className={styles.general}>
         <div className={styles.info}>
           <div className={styles.name}>{props.name}</div>
-          <div className={styles.location}>{props.country}, {props.city}</div>
-          <div className={styles.status}>{props.status}</div>
+          <div className={styles.status}>{props.status ? props.status : "status"}</div>
         </div>
         <div className={styles.buttonWrapper}>
-          {props.followed ? (
-            <button onClick={onUnfollow} className={styles.unfollowButton} disabled={props.followingProgress.some(id => id === props.id)}>
+          {props.followed ?
+					(<button 
+							onClick={onUnfollow} 
+							className={styles.unfollowButton} 
+							disabled={props.followingProgress.some(id => id === props.id)}
+						>
               Unfollow
             </button>) 
-            : (
-            <button onClick={onFollow} className={styles.followButton} disabled={props.followingProgress.some(id => id === props.id)}>
+            : 
+						(<button 
+							onClick={onFollow} 
+							className={styles.followButton} 
+							disabled={props.followingProgress.some(id => id === props.id)}
+						>
               Follow
             </button>
           )}

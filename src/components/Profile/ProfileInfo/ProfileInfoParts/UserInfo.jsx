@@ -22,7 +22,7 @@ const UserInfo = (props) => {
 				}
 			</div>
 
-			<div className={styles.statusContainer} title={props.isProfileYours && "Change status"}>
+			<div className={styles.statusContainer} title={props.isProfileYours ? "Change status" : null}>
 				<ProfileStatus 
 					status={props.status} 
 					updateUserStatus={props.updateUserStatus} 

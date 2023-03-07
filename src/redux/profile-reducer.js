@@ -10,13 +10,18 @@ const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
 
 let initialState = {
   posts: [
+		{
+			id: "3",
+			content: "Time to sleep",
+			likesCount: "10",
+		},
     {
-      id: "1",
+      id: "2",
       content: "I'm full and happy :)",
       likesCount: "14",
     },
     {
-      id: "2",
+      id: "1",
       content: "I'm starving...",
       likesCount: "17",
     },
@@ -26,7 +31,7 @@ let initialState = {
 };
 
 
-let addPostId = 3;
+let addPostId = 4;
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {

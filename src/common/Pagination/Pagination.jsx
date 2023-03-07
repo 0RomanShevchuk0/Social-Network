@@ -20,7 +20,7 @@ const Pagination = ({portionSize, ...props}) => {
 	let pagination = portion.map(pageNumber => 
 		<span key={pageNumber}
 		className={props.currentPage === pageNumber ?
-			[styles.pagination, styles.currentPage].join(" ") : styles.pagination}
+			`${styles.pagination} ${styles.currentPage}` : styles.pagination}
 			onClick={() => props.onPageChange(pageNumber)}>
 			{pageNumber}
 		</span>

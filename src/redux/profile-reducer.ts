@@ -1,5 +1,5 @@
 import { profileAPI } from "../API/api"
-import { PostType, ProfileType, ContactsType, PhotosType } from './../types/types';
+import { PostType, ProfileType, PhotosType } from './../types/types';
 
 const ADD_POST = "ADD-POST"
 const DELETE_POST = "DELETE_POST"

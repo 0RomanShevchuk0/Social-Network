@@ -11,7 +11,7 @@ const Profile = (props) => {
 
 	const [isProfileEditMode, setIsProfileEditMode] = useState(false);
 	
-	if (!props.profile) {
+	if (!props.profile.userId) {
 		return(
 			<div className={styles.profile}>
 				<Loader />

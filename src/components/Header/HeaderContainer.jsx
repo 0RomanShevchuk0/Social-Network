@@ -13,7 +13,6 @@ const mapStateToProps = (state) => {
 		login: state.auth.login,
 		isAuth: state.auth.isAuth,
 		authProfilePhoto: state.auth.authProfilePhoto,
-
 	}
 }
 

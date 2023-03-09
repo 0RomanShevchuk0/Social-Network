@@ -1,25 +1,27 @@
-import { usersAPI } from "../API/api";
+import { usersAPI } from "../API/api"
+import { UserType } from "../types/types"
 
-const FOLLOW = "FOLLOW";
-const UNFOLLOW = "UNFOLLOW";
-const SET_USERS = "SET_USERS";
-const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
-const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
-const SET_IS_LOADING = "SET_IS_LOADING";
-const TOGGLE_FOLLOWING_PROGRESS = "TOGGLE_FOLLOWING_PROGRESS";
+const FOLLOW = "FOLLOW"
+const UNFOLLOW = "UNFOLLOW"
+const SET_USERS = "SET_USERS"
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
+const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
+const SET_IS_LOADING = "SET_IS_LOADING"
+const TOGGLE_FOLLOWING_PROGRESS = "TOGGLE_FOLLOWING_PROGRESS"
 
 
 let initialState = {
-	users : [ ],
+	users : [] as Array<UserType>,
 	pageSize: 5,
 	totalUsersCount: 0,
 	currentPage: 1,
 	isLoading: false,
-	followingProgress: [],
+	followingProgress: [] as Array<number>, // array of users ids
 };
 
+type StateType = typeof initialState
 
-const usersReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action: any): StateType => {
   switch (action.type) {
 		case FOLLOW:
 			return {
@@ -59,16 +61,16 @@ const usersReducer = (state = initialState, action) => {
 };
 
 
-export const followSuccess = (userId) =>  ({type : FOLLOW, userId});
-export const unfollowSuccess = (userId) => ({type : UNFOLLOW, userId});
-export const setUsers = (users) => ({type : SET_USERS, users});
-export const setCurrentPage = (currentPage) => ({type : SET_CURRENT_PAGE, currentPage});
-export const setTotalUsersCount = (totalUsersCount) => ({type : SET_TOTAL_USERS_COUNT, totalUsersCount});
-export const setIsLoading = (isLoading) => ({type : SET_IS_LOADING, isLoading});
-export const setFollowingProgress = (isLoading, userId) => ({type : TOGGLE_FOLLOWING_PROGRESS, isLoading, userId});
+export const followSuccess = (userId: number) =>  ({type : FOLLOW, userId});
+export const unfollowSuccess = (userId: number) => ({type : UNFOLLOW, userId});
+export const setUsers = (users: Array<UserType>) => ({type : SET_USERS, users});
+export const setCurrentPage = (currentPage: number) => ({type : SET_CURRENT_PAGE, currentPage});
+export const setTotalUsersCount = (totalUsersCount: number) => ({type : SET_TOTAL_USERS_COUNT, totalUsersCount});
+export const setIsLoading = (isLoading: boolean) => ({type : SET_IS_LOADING, isLoading});
+export const setFollowingProgress = (isLoading: boolean, userId: number) => ({type : TOGGLE_FOLLOWING_PROGRESS, isLoading, userId});
 
-export const getUsers = (currentPage, pageSize) => {
-	return async (dispatch) => {
+export const getUsers = (currentPage: number, pageSize: number) => {
+	return async (dispatch: any) => {
 		dispatch(setIsLoading(true));
 		dispatch(setCurrentPage(currentPage));
 		
@@ -79,7 +81,7 @@ export const getUsers = (currentPage, pageSize) => {
 	}
 }
 
-async function followUnfollowFlow(dispatch, apiMethod, actionCreator, userId) {
+async function followUnfollowFlow(dispatch: any, apiMethod: any, actionCreator: any, userId: number) {
 	dispatch(setFollowingProgress(true, userId));
 		const response = await apiMethod(userId);
 		if(response.resultCode === 0) {
@@ -88,15 +90,15 @@ async function followUnfollowFlow(dispatch, apiMethod, actionCreator, userId) {
 		dispatch(setFollowingProgress(false, userId));
 }
 
-export const follow = (userId) => {
-	return (dispatch) => {
+export const follow = (userId: number) => {
+	return (dispatch: any) => {
 		const apiMethod = usersAPI.follow;
 		const actionCreator = followSuccess;
 		followUnfollowFlow(dispatch, apiMethod, actionCreator, userId);
 	}
 }
-export const unfollow = (userId) => {
-	return (dispatch) => {
+export const unfollow = (userId: number) => {
+	return (dispatch: any) => {
 		const apiMethod = usersAPI.unfollow;
 		const actionCreator = unfollowSuccess;
 		followUnfollowFlow(dispatch, apiMethod, actionCreator, userId);

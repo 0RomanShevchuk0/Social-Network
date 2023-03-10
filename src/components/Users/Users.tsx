@@ -3,10 +3,25 @@ import Loader from "../../common/Loader/Loader";
 import Pagination from "../../common/Pagination/Pagination";
 
 import styles from "./Users.module.scss";
+import { UserType } from "../../types/types";
+import { FC } from "react";
 
 
-const Users = (props) => {
-  let usersElements = props.users.map((user) => {
+type PropsType = {
+	users: Array<UserType>
+	followingProgress: Array<number>
+	isLoading: boolean
+	totalUsersCount: number
+	pageSize: number
+	currentPage: number
+
+	follow: (userId: number) => void
+	unfollow: (userId: number) => void
+	onPageChange: (pageNumber: number) => void
+}
+
+const Users: FC<PropsType> = (props) => {
+  let usersElements = props.users.map((user: UserType) => {
     return (
       <User
         key={user.id}
@@ -15,7 +30,6 @@ const Users = (props) => {
         name={user.name}
         status={user.status}
 				followed={user.followed}
-
 				followingProgress={props.followingProgress}
 				
 				follow={props.follow}

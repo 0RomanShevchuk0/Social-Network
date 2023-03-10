@@ -38,7 +38,7 @@ const Pagination = ({portionSize, ...props}) => {
 	if(portion.length === 0) return null;
 	return (
 		<div className={styles.paginationContainer}>
-			{portion[0] < portionSize ?
+			{portion[0] < portionSize + 1 ?
 			<button className={styles.navigate} disabled>
 				<img src={disabledDoubleLeft} className={styles.navigateArrow} alt="prev" />
 			</button> :

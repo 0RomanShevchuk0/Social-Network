@@ -1,8 +1,22 @@
 import styles from "./User.module.scss";
 import defaultPhoto from "./../../../assets/img/DialogPersone.png";
 import { NavLink } from "react-router-dom";
+import { FC } from "react";
 
-const User = (props) => {
+
+type PropsType = {
+	id: number
+	avatarImg: string | null
+	name: string
+	status: string
+	followed: boolean
+	followingProgress: Array<number>
+	
+	follow: (userId: number) => void
+	unfollow: (userId: number) => void
+}
+
+const User: FC<PropsType> = (props) => {
   const onFollow = () => props.follow(props.id);
   const onUnfollow = () => props.unfollow(props.id);
 
@@ -28,7 +42,7 @@ const User = (props) => {
 					(<button 
 							onClick={onUnfollow} 
 							className={styles.unfollowButton} 
-							disabled={props.followingProgress.some(id => id === props.id)}
+							disabled={props.followingProgress.some((id: number) => id === props.id)}
 						>
               Unfollow
             </button>) 
@@ -36,7 +50,7 @@ const User = (props) => {
 						(<button 
 							onClick={onFollow} 
 							className={styles.followButton} 
-							disabled={props.followingProgress.some(id => id === props.id)}
+							disabled={props.followingProgress.some((id: number) => id === props.id)}
 						>
               Follow
             </button>

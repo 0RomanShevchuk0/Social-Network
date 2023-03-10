@@ -3,7 +3,11 @@ import Song from "./Song/Song";
 
 import styles from "./Music.module.scss";
 
-const Music = (props: any) => {
+type PropsType = {
+	songs: Array<SongType>
+}
+
+const Music = (props: PropsType) => {
 	return (
 		<div className={styles.wrapper}>
 			<h1>Music</h1>

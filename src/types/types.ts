@@ -39,6 +39,16 @@ export type UserType = {
 }
 
 
+export type DialogType = {
+	id: number,
+	name: string,
+}
+export type MessageType = {
+	id: number,
+	message: string,
+}
+
+
 export type SongType = {
 	id: number
 	image: string

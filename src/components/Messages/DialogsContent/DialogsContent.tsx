@@ -5,9 +5,16 @@ import Message from "./Message/Message";
 import styles from "./DialogsContent.module.scss";
 import sendButton from "./../../../assets/img/sendButton.png";
 import { validateNewMessage } from "../../../common/validator";
+import { FC } from "react";
+import { MessageType } from "../../../types/types";
 
 
-const DialogsContent = (props) => {
+type PropsType = {
+	messages: Array<MessageType>
+	addMessage: (newMessage: string) => void
+}
+
+const DialogsContent: FC<PropsType> = (props) => {
 
 	let dialogsContentItems = props.messages.map((item) => (
 		<Message message={item.message} key={item.id} />

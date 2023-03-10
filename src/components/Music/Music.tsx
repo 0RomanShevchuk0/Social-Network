@@ -1,11 +1,13 @@
-import styles from "./Music.module.scss";
+import { SongType } from "../../types/types";
 import Song from "./Song/Song";
 
-const Music = (props) => {
+import styles from "./Music.module.scss";
+
+const Music = (props: any) => {
 	return (
 		<div className={styles.wrapper}>
 			<h1>Music</h1>
-			{props.songs.map( (song) =>
+			{props.songs.map( (song: SongType) =>
 			<Song
 				key={song.id}
 				name={song.name}
@@ -16,5 +18,6 @@ const Music = (props) => {
 		</div>
 	)
 };
+
 
 export default Music;

@@ -5,7 +5,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { getAuthUserData, setAuthProfilePhoto } from "./redux/auth-reducer";
 import { initialize } from "./redux/app-reducer";
 
-import styles from "./app.module.scss";
+import styles from "./utils/app.module.scss";
 
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Navbar from "./components/Navbar/Navbar";
@@ -26,7 +26,7 @@ const App = (props) => {
 	}, [props.isAuth]);
 	
 	if(!props.initialized) return <Loader />
-
+	
 	return (
 			<div className={styles.App}>
 				<div className={styles.wrapper}>

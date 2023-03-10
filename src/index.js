@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import reportWebVitals from "./reportWebVitals";
+import reportWebVitals from "./utils/reportWebVitals";
 import App from "./App";
 import { HashRouter } from "react-router-dom";
 
-import "./index.css";
+import "./utils/index.css";
 
 import store from "./redux/redux-store";
 

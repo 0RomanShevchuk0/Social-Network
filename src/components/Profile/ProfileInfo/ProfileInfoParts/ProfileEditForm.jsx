@@ -35,7 +35,6 @@ const ProfileEditForm = ({profile, ...props}) => {
 			}
 		}
 		const response = await props.store.dispatch(updateProfile(result, submitProps.setStatus));
-		debugger
 		if(response.resultCode === 0){
 			props.setIsProfileEditMode(false);
 		}

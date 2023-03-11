@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, MouseEventHandler, useState } from 'react';
+import React, { ChangeEvent, FC, MouseEventHandler, useRef, useState } from 'react';
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Formik, Form, Field } from 'formik';
@@ -48,6 +48,17 @@ const Login: FC<PropsType> = (props) => {
 			setPasswordVisibility("password");
 			setPasswordIcon(showPassword);
 		}
+	}
+
+	function onPopUpClick(text: string) {
+		const copyPopUp: any = document.getElementById('copyPopUp')
+		navigator.clipboard.writeText(text)
+		copyPopUp.classList.remove(styles.hidden)
+		setTimeout(() => {
+			copyPopUp.classList.add(styles.hidden)
+		}	
+		, 800)
+		
 	}
 	
 	if(props.isAuth) return <Navigate to="/profile"/>;
@@ -103,8 +114,20 @@ const Login: FC<PropsType> = (props) => {
 					Don't have an account?
 				</h4>
 				<div className={`${styles.tipBody} ${styles.hidden}`}>
-					<div><span style={{fontWeight: "bold"}}>Login:</span> 0romanshevchuk0@gmail.com</div>
-					<div><span style={{fontWeight: "bold"}}>Password:</span> test</div>
+					<div 
+						onClick={() => onPopUpClick('0romanshevchuk0@gmail.com')}
+						style={{cursor: "pointer"}}
+					>
+						<span style={{fontWeight: "bold"}}>Login:</span> 0romanshevchuk0@gmail.com
+					</div>
+					<div 
+						onClick={() => onPopUpClick('test')}
+						style={{cursor: "pointer"}}	
+					>
+						<span style={{fontWeight: "bold"}}>Password:</span> test
+					</div>
+
+					<div className={`${styles.popUpCopied} ${styles.hidden}`} id='copyPopUp' >Text copied</div>
 				</div>
 			</div>
 		</div>

@@ -1,11 +1,16 @@
 import { Field } from 'formik';
+import { FC } from 'react';
 import Input from '../../common/Input/Input';
 import { RequiredField } from '../../common/validator';
 
 import styles from "./Login.module.scss";
 
 
-function Captcha(props) {
+type PropsType = {
+	captchaImg: string
+}
+
+const Captcha: FC<PropsType> = (props) => {
 	return (
 		<div className={styles.captchaContainer}>
 			<img src={props.captchaImg} alt="captcha" className={styles.captchaImg} />

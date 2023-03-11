@@ -2,9 +2,21 @@ import ProfileStatus from "./ProfileStatus";
 
 import styles from "../ProfileInfo.module.scss";
 import editIcon from "../../../../assets/img/edit-icon.png";
+import { FC } from "react";
+import { ProfileType } from "../../../../types/types";
 
 
-const UserInfo = (props) => {
+type PropsType = {
+	profile: ProfileType
+	contacts: any
+	isProfileYours: boolean
+	status: string
+
+	setIsProfileEditMode: (value: boolean) => void
+	updateUserStatus: (newStatus: string) => void
+}
+
+const UserInfo: FC<PropsType> = (props) => {
 	return (
 		<div className={styles.userInfo}>
 			<div className={styles.upperBlock}>
@@ -22,7 +34,7 @@ const UserInfo = (props) => {
 				}
 			</div>
 
-			<div className={styles.statusContainer} title={props.isProfileYours ? "Change status" : null}>
+			<div className={styles.statusContainer} title={props.isProfileYours ? "Change status" : undefined}>
 				<ProfileStatus 
 					status={props.status} 
 					updateUserStatus={props.updateUserStatus} 

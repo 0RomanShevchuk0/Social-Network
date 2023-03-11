@@ -1,4 +1,6 @@
+import { ThunkAction } from 'redux-thunk';
 import { authAPI, profileAPI } from "../API/api"
+import { GlobalStateType } from './redux-store';
 
 const SET_AUTH_USER_INFO = 'SET-AUTH-USER-INFO'
 const SET_CAPTCHA_IMAGE = 'SET_CAPTCHA_IMAGE'
@@ -16,7 +18,7 @@ let initialState = {
 
 type StateType = typeof initialState
 
-const authReducer = (state = initialState, action: any): StateType => {
+const authReducer = (state = initialState, action: ActionsType): StateType => {
   switch (action.type) {
 		case SET_AUTH_USER_INFO:
 			return { 
@@ -40,6 +42,9 @@ const authReducer = (state = initialState, action: any): StateType => {
       return state
   }
 };
+
+type ActionsType = SetAuthProfilePhotoSuccessActionType | SetAuthUserDataActionType |
+										SetCaptchaImageActionType
 
 type SetAuthProfilePhotoSuccessActionType = {
 	type: typeof SET_AUTH_PROFILE_PHOTO_SUCCESS,
@@ -71,8 +76,11 @@ const setCaptchaImage = (captchaImg: string | null): SetCaptchaImageActionType =
 	type: SET_CAPTCHA_IMAGE, captchaImg 
 });
 
-export const getAuthUserData = () => {
-	return async (dispatch: any) => {
+
+type ThunkType = ThunkAction<void, GlobalStateType, unknown, ActionsType>
+
+export const getAuthUserData = (): ThunkType => {
+	return async (dispatch) => {
 		const authResponse = await authAPI.me()
 		if (authResponse.data.resultCode === 0) {
 			const { login, id, email } = authResponse.data.data
@@ -83,15 +91,15 @@ export const getAuthUserData = () => {
 
 export const login = (
 		email: string, password: string, rememberMe: boolean, 
-		captcha: string , setStatus: any) => {
-	return async (dispatch: any) => {
+		captcha: string , setStatus: any): ThunkType => {
+	return async (dispatch) => {
 		const response = await authAPI.login(email, password, rememberMe, captcha)
 		if (response.resultCode === 0) {
 			dispatch(getAuthUserData());
 			dispatch(setCaptchaImage(null));
 		}
 		else if (response.resultCode === 10) {
-			return "captcha";
+			return "captcha"
 		}
 		else {
 			setStatus({ error: response.messages[0] })
@@ -99,8 +107,8 @@ export const login = (
 	}
 }
 
-export const logout = () => {
-	return async (dispatch: any) => {
+export const logout = (): ThunkType => {
+	return async (dispatch) => {
 		const response = await authAPI.logout();
 		if(response.data.resultCode === 0) {
 			dispatch(setAuthUserData(null, null, null, false))
@@ -108,15 +116,15 @@ export const logout = () => {
 	}
 }
 
-export const getCaptcha = () => {
-	return async (dispatch: any) => {
+export const getCaptcha = (): ThunkType => {
+	return async (dispatch) => {
 		const response = await authAPI.captcha();
 		dispatch(setCaptchaImage(response.data.url))
 	}
 }
 
-export const setAuthProfilePhoto = (userId: number) => {
-	return async (dispatch: any) => {
+export const setAuthProfilePhoto = (userId: number): ThunkType => {
+	return async (dispatch) => {
 		const response = await profileAPI.getProfile(userId);
 		dispatch(setAuthProfilePhotoSuccess(response.photos.small))
 	}

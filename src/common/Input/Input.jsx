@@ -9,7 +9,7 @@ const Input = (props) => {
 	return (
 		<div>
 			<Field {...props} className={meta.error && meta.touched ? 
-				[props.className, styles.inputError].join(' ') : props.className} 
+				`${props.className} ${styles.inputError}` : props.className} 
 			/>
 			{meta.error && meta.touched && <div className={styles.error}>{meta.error}</div>}
 		</div>

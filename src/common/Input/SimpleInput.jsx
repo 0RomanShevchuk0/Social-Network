@@ -5,7 +5,7 @@ import { Field } from 'formik';
 const SimpleInput = (props) => {	
 	return (
 		<div>
-			<Field {...props} className={[props.className, styles.simpleInput].join(' ')} 
+			<Field {...props} className={`${props.className} ${styles.simpleInput}`} 
 			/>
 		</div>
 	)

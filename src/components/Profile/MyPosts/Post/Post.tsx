@@ -3,9 +3,20 @@ import like from "./../../../../assets/img/like.png";
 import trashCan from "./../../../../assets/img/deletePost.png";
 
 import styles from "./Post.module.scss";
+import { FC } from "react";
+import { ProfileType } from "../../../../types/types";
 
 
-const Post = (props) => {
+type PropsType = {
+	profile: ProfileType
+	content: string
+	id: number
+	likesCount: number
+
+	deletePost: (postId: number) => void
+}
+
+const Post: FC<PropsType> = (props) => {
   return (
     <div className={styles.post}>
       <div className={styles.mainBody}>

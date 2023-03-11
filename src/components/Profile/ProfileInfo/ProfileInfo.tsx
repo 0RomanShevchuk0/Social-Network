@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 
 import UploadImage from "./ProfileInfoParts/UploadImage";
 import ProfileEditForm from "./ProfileInfoParts/ProfileEditForm";
@@ -18,9 +18,23 @@ import twitterIcon from "../../../assets/img/contacts/twitter-icon.png";
 import webSiteIcon from "../../../assets/img/contacts/website-icon.png";
 import youTubeIcon from "../../../assets/img/contacts/youtube-icon.png";
 import AvatarImage from "./ProfileInfoParts/AvatarImage";
+import { ProfileType } from "../../../types/types";
 
 
-const ProfileInfo = ({profile, ...props}) => {
+type PropsType = {
+	profile: ProfileType
+	isProfileEditMode: boolean
+	isProfileYours: boolean
+	status: string
+
+	store: any
+
+	setIsProfileEditMode: (value: boolean) => void
+	updateUserStatus: (newStatus: string) => void
+	updateUserPhoto: (photo: string) => void
+}
+
+const ProfileInfo: FC<PropsType> = ({profile, ...props}) => {
 	
 	const [isUploadPhotoVisible, setIsUploadPhotoVisible] = useState(false);
 	const [uploadPhotoClasses, setUploadPhotoClasses] = useState([styles.uploadPhoto, styles.hidden]);
@@ -28,7 +42,7 @@ const ProfileInfo = ({profile, ...props}) => {
 	
 
 	useEffect(() => {
-		function hideUploadPhoto(e) {
+		function hideUploadPhoto(e: any) {
 			if(isUploadPhotoVisible && 
 				e.target.closest('div').id !== "uploadPhoto" &&
 				e.target.closest('div').id !== "changePhoto"
@@ -91,10 +105,9 @@ const ProfileInfo = ({profile, ...props}) => {
           />
         </div>
         <div className={styles.content}>
-					<AvatarImage profile={profile} {...props} toggleIsUploadPhotoVisible={toggleIsUploadPhotoVisible} />
+					<AvatarImage profile={profile} isProfileYours={props.isProfileYours} toggleIsUploadPhotoVisible={toggleIsUploadPhotoVisible} />
 					<UserInfo
 						profile={profile} {...props} contacts={contacts}
-						isProfileEditMode={props.isProfileEditMode}
 						setIsProfileEditMode={props.setIsProfileEditMode} 
 					/>
         </div>

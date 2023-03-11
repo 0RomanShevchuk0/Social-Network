@@ -1,9 +1,18 @@
+import { FC } from "react";
 import defaultAvatarImg from "../../../../assets/img/DialogPersone.png";
+import { ProfileType } from "../../../../types/types";
 
 import styles from "../ProfileInfo.module.scss";
 
 
-const AvatarImage = (props) => {
+
+type PropsType = {
+	profile: ProfileType
+	isProfileYours: boolean
+
+	toggleIsUploadPhotoVisible: () => void
+}
+const AvatarImage: FC<PropsType> = (props) => {
 	return (
 		<div className={styles.avatarImgWrapper}>
 			{props.isProfileYours && 

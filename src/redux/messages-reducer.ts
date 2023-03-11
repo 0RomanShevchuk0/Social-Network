@@ -38,7 +38,7 @@ type StateType = typeof initialState
 
 let addMessageId = 4
 
-const messageReducer = (state = initialState, action: any): StateType => {
+const messageReducer = (state = initialState, action: SendMessageActionType): StateType => {
   switch (action.type) {
     case SEND_MESSAGE: {
 				let newMessage = {

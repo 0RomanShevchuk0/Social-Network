@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import doubleLeft from '../../assets/img/double-left.png';
 import disabledDoubleLeft from '../../assets/img/disabled-double-left.png';
@@ -7,15 +7,24 @@ import doubleRight from '../../assets/img/double-right.png';
 import styles from './Pagination.module.scss'
 
 
-const Pagination = ({portionSize, ...props}) => {
+type PropsType = {
+	portionSize: number
+	totalCount: number
+	pageSize: number
+	currentPage: number
+
+	onPageChange: (pageNumber: number) => void
+}
+
+const Pagination: FC<PropsType> = ({portionSize, ...props}) => {
 
 	let pagesCount = Math.ceil(props.totalCount / props.pageSize);
-	let pages = [];
+	let pages: Array<number> = [];
 	for(let i = 1; i < pagesCount; i++) {
 		pages.push(i);
 	}
 
-	let [portion, setPortion] = useState([]);
+	let [portion, setPortion] = useState<Array<number>>([]);
 	
 	let pagination = portion.map(pageNumber => 
 		<span key={pageNumber}

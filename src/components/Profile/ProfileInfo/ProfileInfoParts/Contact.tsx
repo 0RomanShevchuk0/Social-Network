@@ -1,4 +1,11 @@
-const Contact = (props) => {
+import { FC } from "react";
+
+type PropsType = {
+	link: string
+	icon: string
+}
+
+const Contact: FC<PropsType> = (props) => {
 	return (
 		<div>
 			<a 

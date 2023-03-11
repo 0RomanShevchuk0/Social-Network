@@ -1,10 +1,15 @@
 import { Formik, Form, Field } from 'formik';
+import { FC } from 'react';
 import { validateNewPost } from '../../../../common/validator';
 
 import styles from "./AddPost.module.scss";
 
 
-const AddPost = (props) => {
+type PropsType = {
+	addPost: (value: string) => void
+}
+
+const AddPost: FC<PropsType> = (props) => {
   return (
 		<Formik
 			initialValues={{addPost: ""}}

@@ -1,26 +1,32 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useState } from "react";
 
 import checkMark from "../../../../assets/img/checkMark.png";
-import { validateNewPost } from "../../../../common/validator";
-
 import styles from "../ProfileInfo.module.scss";
 
 
-const ProfileStatus = (props) => {
+type PropsType = {
+	status: string
+	isProfileYours: boolean
+
+	updateUserStatus: (newStatus: string) => void
+}
+
+const ProfileStatus: FC<PropsType> = (props) => {
 	let [status, setStatus] = useState(props.status);
 	let [statusEditMode, setStatusEditMode] = useState(false);
 
 	useEffect(() => {
 		if(status !== props.status) setStatus(props.status);
-	}, [props.status]);
+	}, [props.status, statusEditMode]);
 
 	function handleSubmit() {
 		props.updateUserStatus(status);
 		setStatusEditMode(false);
+		
 	}
 
-	function onStatusTextChange(e) {
+	function onStatusTextChange(e: any) {
 		setStatus(e.target.value);
 	}
 
@@ -28,10 +34,10 @@ const ProfileStatus = (props) => {
 		setTimeout(() => {
 			setStatusEditMode(false);
 			setStatus(props.status);
-		}, 100)
+		}, 200)
 	}
 
-	function handleKeyDown(event) {
+	function handleKeyDown(event: any) {
     if (event.key === 'Enter') {
 			handleSubmit();
     }
@@ -59,7 +65,7 @@ const ProfileStatus = (props) => {
 					</button>
 				</div> :
 				<div 
-					onClick={props.isProfileYours ? () => setStatusEditMode(true) : null} 
+					onClick={props.isProfileYours ? () => setStatusEditMode(true) : undefined} 
 					style={{cursor: props.isProfileYours ? "pointer" : "default"}}
 				>
 					{props.status ? props.status : 'status'}

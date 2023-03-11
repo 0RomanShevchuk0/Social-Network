@@ -1,5 +1,7 @@
+import { ThunkAction } from 'redux-thunk';
 import { profileAPI } from "../API/api"
-import { PostType, ProfileType, PhotosType } from './../types/types';
+import { PostType, ProfileType, PhotosType } from './../types/types'
+import { GlobalStateType } from './redux-store';
 
 const ADD_POST = "ADD-POST"
 const DELETE_POST = "DELETE_POST"
@@ -53,14 +55,14 @@ type StateType = typeof initialState
 
 let addPostId: number = 4
 
-const profileReducer = (state = initialState, action: any): StateType => {
+const profileReducer = (state = initialState, action: ActionsType): StateType => {
   switch (action.type) {
     case ADD_POST: {
 				let newPost = {
 					id: addPostId,
           content: action.newPostText,
           likesCount: 0,
-        };
+        }
 				addPostId = addPostId + 1
 				return {
 					...state,
@@ -95,10 +97,13 @@ const profileReducer = (state = initialState, action: any): StateType => {
     default:
       return state
   }
-};
+}
 
 
 export default profileReducer
+
+type ActionsType = AddPostActionType | DeletePostActionType | SetUserProfileSuccessActionType |
+										SetStatusActionType | SetPhotosActionType | UpdateProfileSuccessActionType
 
 type AddPostActionType = {
 	type: typeof ADD_POST
@@ -140,22 +145,23 @@ const updateProfileSuccess = (updatedProfile: ProfileType): UpdateProfileSuccess
 	type: UPDATE_PROFILE_SUCCESS, updatedProfile
 })
 
+type ThunkType = ThunkAction<void, GlobalStateType, unknown, ActionsType>
 
-export const setUserProfile = (userId: number) => {
+export const setUserProfile = (userId: number): ThunkType => {
 	return async (dispatch: any) => {
 		const response = await profileAPI.getProfile(userId)
 		dispatch(setUserProfileSuccess(response))
 	}
 }
 
-export const getUserStatus = (userId: number) => {
+export const getUserStatus = (userId: number): ThunkType => {
 	return async (dispatch: any) => {
 		const response = await profileAPI.getStatus(userId)
 		dispatch(setStatus(response))
 	}
 }
 
-export const updateUserStatus = (status: string) => {
+export const updateUserStatus = (status: string): ThunkType => {
 	return async (dispatch: any) => {
 		const response = await profileAPI.updateStatus(status)
 		if(response.data.resultCode === 0) {
@@ -164,7 +170,7 @@ export const updateUserStatus = (status: string) => {
 	}
 }
 
-export const updateUserPhoto = (image: string) => {
+export const updateUserPhoto = (image: string): ThunkType => {
 	return async (dispatch: any) => {
 		const response = await profileAPI.updateAvatar(image)
 		if(response.data.resultCode === 0) {
@@ -173,15 +179,17 @@ export const updateUserPhoto = (image: string) => {
 	}
 }
 
-export const updateProfile = (updatedProfile: ProfileType, setFormikStatus: any) => {
-	return async (dispatch: any) => {
+export const updateProfile = (
+		updatedProfile: ProfileType, setFormikStatus: (status: {error?: string}) => void
+		): ThunkAction<Promise<string>, GlobalStateType, unknown, ActionsType> => {
+	return async (dispatch) => {
 		const response = await profileAPI.updateProfile(updatedProfile)
 		if(response.data.resultCode === 0) {
 			dispatch(updateProfileSuccess(updatedProfile))
-		}
+		} 
 		else {
 			setFormikStatus({ error: response.data.messages[0] })
 		}
-		return response.data
+		return response.data.resultCode
 	}
 }

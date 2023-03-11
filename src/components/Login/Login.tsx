@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { ChangeEvent, FC, MouseEventHandler, useState } from 'react';
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Formik, Form, Field } from 'formik';
@@ -11,14 +11,26 @@ import styles from "./Login.module.scss";
 import showPassword from "../../assets/img/show.png";
 import hidePassword from "../../assets/img/hide.png";
 import Input from '../../common/Input/Input';
+import { GlobalStateType } from '../../redux/redux-store';
 
 
-const Login = (props) => {
+
+type MapStatePropsType = {
+	isAuth: boolean
+	captchaImg: string | null
+}
+type MapDispatchPropsType = {
+	login: (email: string, password: string, rememberMe: boolean, captcha: string, setStatus: any) => any
+	getCaptcha: () => any
+}
+type PropsType = MapStatePropsType & MapDispatchPropsType
+
+const Login: FC<PropsType> = (props) => {
 	
 	const [passwordVisibility, setPasswordVisibility] = useState("password");
 	const [passwordIcon, setPasswordIcon] = useState(showPassword);
 
-	async function handleSubmit(values, submitProps) {
+	async function handleSubmit(values: any, submitProps: any) {
 		const response = await props.login(values.email, values.password, true, values.captcha, submitProps.setStatus)
 		if(response === "captcha") {
 			await props.getCaptcha();
@@ -83,7 +95,7 @@ const Login = (props) => {
 			</Formik>
 			<div className={styles.tip}>
 				<h4 
-					onClick={(e) => {e.target.nextElementSibling.classList.contains(styles.hidden) ?
+					onClick={(e: any) => {(e.target).nextElementSibling.classList.contains(styles.hidden) ?
 						e.target.nextElementSibling.classList.remove(styles.hidden) :
 						e.target.nextElementSibling.classList.add(styles.hidden)
 					}}
@@ -100,8 +112,7 @@ const Login = (props) => {
 }
 
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: GlobalStateType): MapStatePropsType => {
 	return {
 		isAuth: state.auth.isAuth,
 		captchaImg: state.auth.captchaImg

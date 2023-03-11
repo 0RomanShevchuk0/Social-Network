@@ -1,13 +1,28 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import Loader from "../../common/Loader/Loader";
 
 import styles from "./Profile.module.scss";
+import { PostType, ProfileType } from "../../types/types";
 
 
-const Profile = (props) => {
+type PropsType = {
+	profile: ProfileType
+	status: string
+	isProfileYours: boolean
+	posts: Array<PostType>
+
+	store: any
+
+	updateUserPhoto: (image: string) => void
+	updateUserStatus: (newStatus: string) => void
+	addPost: (newPostText: string) => void
+	deletePost: (postId: number) => void
+}
+
+const Profile: FC<PropsType> = (props) => {
 
 	const [isProfileEditMode, setIsProfileEditMode] = useState(false);
 	
@@ -20,8 +35,8 @@ const Profile = (props) => {
 	}
 	
   return (
-    <div className={styles.profile} style={isProfileEditMode ? {overflow: "hidden"} : null}>
-			{isProfileEditMode && <div style={{position:"absolute", height:"100vh", width:"100%", background:"rgba(0,0,0,0.5)", zIndex:"2", boxSizing:"border-box", top:0, left:0}}></div>}
+    <div className={styles.profile} style={isProfileEditMode ? {overflow: "hidden"} : undefined}>
+			{isProfileEditMode && <div className={styles.overlay} ></div>}
       <ProfileInfo 
 				profile={props.profile} updateUserPhoto={props.updateUserPhoto}
 				status={props.status} updateUserStatus={props.updateUserStatus} 

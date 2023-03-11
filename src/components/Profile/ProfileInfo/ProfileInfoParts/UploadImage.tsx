@@ -1,25 +1,33 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 
 import styles from "../ProfileInfo.module.scss";
 
 
-const UploadImage = (props) => {
+type PropsType = {
+	classes: string
+
+	updateUserPhoto: (image: string) => void
+	setIsUploadPhotoVisible: (value: boolean) => void
+	setUploadPhotoClasses: (styles: Array<string>) => void
+}
+
+const UploadImage: FC<PropsType> = (props) => {
 	const [image, setImage] = useState('');
 	const [preview, setPreview] = useState('');
 
-	function submit(e) {
+	function submit(e: any) {
 		e.preventDefault();
 		props.updateUserPhoto(image);
 		props.setIsUploadPhotoVisible(false);
 		props.setUploadPhotoClasses([styles.uploadPhoto, styles.hidden]);
 	}
 
-	function handleFileUpload(e) {
+	function handleFileUpload(e: any) {
 		let reader = new FileReader();
 		let file = e.target.files[0];
 		setImage(file);
 		reader.readAsDataURL(file);
-		reader.onloadend = () => setPreview(reader.result);
+		reader.onloadend = () => setPreview((reader as any).result);
 	}
 	
 	return (
